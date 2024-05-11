@@ -1,6 +1,6 @@
 <?php
 session_start();
-$dbHost = "";
+$dbHost = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
 $dbName = "ilgirone";

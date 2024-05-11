@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 10, 2024 alle 02:53
+-- Creato il: Mag 11, 2024 alle 03:24
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -110,7 +110,8 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `image_id`, `email`, `fi
 (3, 'qwertz', 'd482ba4b7d3218f3e841038c407ed1f94e9846a4dd68e56bab7718903962aa98', NULL, 'qwertz@gmail.com', 'qwe', 'rtz', '2024-05-10 01:31:21'),
 (4, 'tumultuoso1378', '003d8212504fe979b5ad227869bf63c801e32a59920820c1be455d4157e9d3e6', NULL, 'tintore@fi.com', 'ciompo', 'tintore', '2024-05-10 01:37:21'),
 (5, 'governatoreDirezionale', '549954f9ed1f6f6f7aeeacbe69187f99159e1b1c17057e4807acf760b93e8611', NULL, 'giano@comune.fi.com', 'giano', 'della bella', '2024-05-10 01:39:32'),
-(6, 'elitropiaFinder2000', '828b0d9743aaba2d4150982570110d6f4237b712809b01745540ec47296732b0', NULL, 'ardiAndrew@cdm.fi.com', 'Mr.Andreuccio', NULL, '2024-05-10 01:42:55');
+(6, 'elitropiaFinder2000', '828b0d9743aaba2d4150982570110d6f4237b712809b01745540ec47296732b0', NULL, 'ardiAndrew@cdm.fi.com', 'Mr.Andreuccio', NULL, '2024-05-10 01:42:55'),
+(8, 'taitElSamuel', '9886c6407c4758bb1e3d327a5529ddf0cef70eef6a8833e85b6ca7cf622a92ba', NULL, 'ElSamuel@signa.it', 'Sig.Samuel', '', '2024-05-11 02:52:51');
 
 --
 -- Indici per le tabelle scaricate
@@ -152,6 +153,7 @@ ALTER TABLE `types`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `image_id` (`image_id`);
 
 --
@@ -186,7 +188,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Limiti per le tabelle scaricate

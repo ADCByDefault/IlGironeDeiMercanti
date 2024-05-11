@@ -12,6 +12,11 @@ session_start();
 </head>
 
 <body>
+    <header>
+        <h1>
+            Il Gran Girone Dei Mercanti
+        </h1>
+    </header>
     <?php
     if (isset($_SESSION["error"])) {
         echo "<p>" . $_SESSION["error"] . "</p>";
@@ -20,6 +25,12 @@ session_start();
     <?php
     unset($_SESSION["error"]);
     ?>
+    <div>
+        <a href="authentication/login.html">go to login</a>
+    </div>
+    <div>
+        <a href="authentication/signup.html">go to signup</a>
+    </div>
 </body>
 
 </html>
