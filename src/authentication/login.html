@@ -46,13 +46,10 @@
             event.preventDefault();
             errorContainer.textContent = "";
             const formData = new FormData(form);
-            const response = await fetch(
-                "http://localhost/IlGironeDeiMercanti/src/authentication/login.php",
-                {
-                    method: "POST",
-                    body: formData,
-                }
-            );
+            const response = await fetch("login.php", {
+                method: "POST",
+                body: formData,
+            });
             const data = await response.json();
             console.log(response);
             console.log(data);
@@ -60,7 +57,7 @@
             let message;
             if (data.status == "252") {
                 message = "hai fatto il login";
-                /* window.location.href = "index.php"; */
+                // window.location.href = "index.php";
             } else if (data.status == "453") {
                 message = "password sbagliata";
             } else if (data.status == "451") {

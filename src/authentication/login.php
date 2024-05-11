@@ -14,6 +14,7 @@ if ($result->num_rows > 0) {
     $hash = $row["password"];
     if ($password == $hash) {
         $res = new Response("252"); //login effettuato
+        $_SESSION["user_id"] = $user_id;
     } else {
         $res = new Response("453"); //password sbagliata
     }

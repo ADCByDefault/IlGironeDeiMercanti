@@ -74,13 +74,10 @@
             event.preventDefault();
             errorContainer.textContent = "";
             const formData = new FormData(signupForm);
-            const response = await fetch(
-                "http://localhost/IlGironeDeiMercanti/src/authentication/signup.php",
-                {
-                    method: "POST",
-                    body: formData,
-                }
-            );
+            const response = await fetch("signup.php", {
+                method: "POST",
+                body: formData,
+            });
             const data = await response.json();
             console.log(response);
             console.log(data);

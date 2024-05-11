@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 11, 2024 alle 03:24
+-- Creato il: Mag 11, 2024 alle 23:14
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -36,6 +36,15 @@ CREATE TABLE `articles` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `articles`
+--
+
+INSERT INTO `articles` (`article_id`, `user_id`, `type_id`, `name`, `description`, `created_at`) VALUES
+(1, 8, 6, 'succi', 'succi gay schiavo degli ebrei', '2024-05-11 16:39:29'),
+(2, 5, 6, 'elitropia', 'vendo elitropia trovata nel mugn', '2024-05-11 16:41:28'),
+(3, 5, 2, 'fenta', 'micro dose', '2024-05-11 19:18:04');
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +71,13 @@ CREATE TABLE `proposals` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `proposals`
+--
+
+INSERT INTO `proposals` (`proposal_id`, `user_id`, `article_id`, `price`, `created_at`) VALUES
+(1, 8, 3, '1 melodioni di €', '2024-05-11 20:50:12');
+
 -- --------------------------------------------------------
 
 --
@@ -79,6 +95,7 @@ CREATE TABLE `types` (
 
 INSERT INTO `types` (`type_id`, `name`) VALUES
 (3, 'abbigliamento'),
+(6, 'altro'),
 (2, 'cucina'),
 (1, 'informatica'),
 (5, 'libri'),
@@ -164,7 +181,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT per la tabella `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `images`
@@ -176,13 +193,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT per la tabella `proposals`
 --
 ALTER TABLE `proposals`
-  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `types`
 --
 ALTER TABLE `types`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT per la tabella `users`
