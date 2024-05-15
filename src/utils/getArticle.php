@@ -1,6 +1,6 @@
 <?php
-include_once "authentication/connessione.php";
-include_once "class/Response.php";
+include_once "../authentication/connessione.php";
+include_once "../class/Response.php";
 
 $article_id = null;
 $user_id = null;

@@ -7,6 +7,7 @@ window.addEventListener("load", (event) => {
 });
 
 async function getArticles() {
+    console.log("taiti coglone")
     const response = await fetch("utils/getArticles.php", {
         method: "POST",
     });

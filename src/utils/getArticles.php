@@ -1,6 +1,6 @@
 <?php
-include_once "authentication/connessione.php";
-include_once "class/Response.php";
+include_once "../authentication/connessione.php";
+include_once "../class/Response.php";
 
 if (isset($_POST["user_id"])) {
     $user_id = $_POST["user_id"];
