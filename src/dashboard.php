@@ -13,7 +13,7 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <script src="profile.js" defer></script>
+    <script src="dashboard.js" defer></script>
 </head>
 
 <body>
@@ -28,6 +28,9 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
     }
     echo "<h2>" . " Benvenuto " . $username . "</h2>";
     ?>
+    <p>
+        <a href="index.php">Home</a>
+    </p>
     <div id="errorContainer"></div>
     <section id="articles">
         <h2>i tuoi articoli sul mercato</h2>

@@ -1,72 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Login</title>
-    </head>
-    <body>
-        <header>
-            <h1>Pagina Login</h1>
-        </header>
-        <main>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="log-sing.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <header>
+        <h1>Pagina Login</h1>
+    </header>
+    <main>
+        <div class="mainDiv">
             <div id="errorContainer"></div>
             <form action="login.php" method="post" id="loginForm">
                 <div>
                     <label for="username">Username</label>
-                    <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        placeholder="username"
-                        required
-                    />
+                    <br>
+                    <input type="text" name="username" id="username" placeholder="username" required />
+                    <br>
                 </div>
                 <div>
                     <label for="password">Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="password"
-                        required
-                    />
+                    <br>
+                    <input type="password" name="password" id="password" placeholder="password" required />
+                    <br>
                 </div>
-                <button>Invio</button>
+                <button>Invia</button>
             </form>
             <div>
-                <a href="../home.php">home</a>
+                <br>
+                <a href="../index.php">home</a>
             </div>
-        </main>
-    </body>
-    <script>
-        const form = document.getElementById("loginForm");
-        const errorContainer = document.getElementById("errorContainer");
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            errorContainer.textContent = "";
-            const formData = new FormData(form);
-            const response = await fetch("login.php", {
-                method: "POST",
-                body: formData,
-            });
-            const data = await response.json();
-            console.log(response);
-            console.log(data);
-            errorContainer.textContent = data;
-            let message;
-            if (data.status == "252") {
-                message = "hai fatto il login";
-                window.location.assign("../profile.php");
-            } else if (data.status == "453") {
-                message = "password sbagliata";
-            } else if (data.status == "451") {
-                message = "username o email sbagliati";
-            } else {
-                message = "errore generico";
-            }
-            console.log(message);
-            errorContainer.textContent = message;
+        </div>
+    </main>
+</body>
+<script>
+    const form = document.getElementById("loginForm");
+    const errorContainer = document.getElementById("errorContainer");
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        errorContainer.textContent = "";
+        const formData = new FormData(form);
+        const response = await fetch("login.php", {
+            method: "POST",
+            body: formData,
         });
-    </script>
+        document.body.style.rotateZ = "90deg";
+        const data = await response.json();
+        console.log(response);
+        console.log(data);
+
+
+        errorContainer.textContent = data;
+        let message;
+        if (data.status == "252") {
+            message = "hai fatto il login";
+            window.location.assign("../index.php");
+        } else if (data.status == "453") {
+            message = "password sbagliata";
+        } else if (data.status == "451") {
+            message = "username o email sbagliati";
+        } else {
+            message = "errore generico";
+        }
+        console.log(message);
+        errorContainer.textContent = message;
+    });
+</script>
 </html>
