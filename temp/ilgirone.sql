@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 11, 2024 alle 23:14
+-- Creato il: Mag 17, 2024 alle 13:47
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -56,6 +56,17 @@ CREATE TABLE `images` (
   `article_id` int(11) DEFAULT NULL,
   `image_url` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `images`
+--
+
+INSERT INTO `images` (`image_id`, `article_id`, `image_url`) VALUES
+(3, 3, 'upload/fenta_01.webp'),
+(4, 3, 'upload/fenta_02.webp'),
+(5, 3, 'upload/fenta_03.webp'),
+(6, 2, 'upload/9b49aefb-94d0-4331-aa60-8abcc048d331.jpg'),
+(7, 2, 'f4fb75c9-02b8-4e1b-ad98-35afe5226667.jpg');
 
 -- --------------------------------------------------------
 
@@ -187,7 +198,7 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT per la tabella `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT per la tabella `proposals`
