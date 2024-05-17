@@ -66,7 +66,7 @@ INSERT INTO `images` (`image_id`, `article_id`, `image_url`) VALUES
 (4, 3, 'upload/fenta_02.webp'),
 (5, 3, 'upload/fenta_03.webp'),
 (6, 2, 'upload/9b49aefb-94d0-4331-aa60-8abcc048d331.jpg'),
-(7, 2, 'f4fb75c9-02b8-4e1b-ad98-35afe5226667.jpg');
+(7, 2, 'upload/f4fb75c9-02b8-4e1b-ad98-35afe5226667.jpg');
 
 -- --------------------------------------------------------
 
