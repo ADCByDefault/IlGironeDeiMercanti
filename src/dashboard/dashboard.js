@@ -7,8 +7,8 @@ window.addEventListener("load", (event) => {
 });
 
 async function getArticles() {
-    console.log("taiti coglone")
-    const response = await fetch("utils/getArticles.php", {
+    console.log("taiti coglone");
+    const response = await fetch("getDashboardArticles.php", {
         method: "POST",
     });
     const data = await response.json();
@@ -55,7 +55,7 @@ function createArticle(article) {
 }
 
 async function getProposals() {
-    const response = await fetch("utils/getProposals.php", {
+    const response = await fetch("getDashboardProposals.php", {
         method: "POST",
     });
     const data = await response.json();

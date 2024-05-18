@@ -1,0 +1,11 @@
+.image-container {
+    width: 100%;
+    display: flex;
+    overflow-y: auto;
+    gap: 1rem;
+}
+
+.image-container img {
+    width: 90%;
+    height: auto;
+}

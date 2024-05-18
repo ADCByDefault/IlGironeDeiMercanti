@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
 
 async function getAllArticles() {
     try {
-        const response = await fetch("utils/getAllArticles.php?", {
+        const response = await fetch("getAllArticles.php", {
             method: "GET",
         });
         const data = await response.json();
@@ -47,7 +47,7 @@ function createArticle(article) {
     user.classList.add("user");
     user.textContent = article.username;
     const link = document.createElement("a");
-    link.href = "pages/article.php?article_id=" + article.article_id;
+    link.href = "article/article.php?article_id=" + article.article_id;
     link.textContent = "vai all'articolo";
     const images = createImages(article.images);
     // appending

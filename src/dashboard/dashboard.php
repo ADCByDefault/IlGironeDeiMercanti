@@ -1,6 +1,5 @@
 <?php
-include_once "authentication/connessione.php";
-//$_SESSION["user_id"] = null;
+include_once "../authentication/connessione.php";
 $user_id = $_SESSION["user_id"];
 $sql = "SELECT username FROM users WHERE user_id = $user_id";
 $username = $conn->query($sql)->fetch_assoc()["username"];
@@ -29,7 +28,7 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
     echo "<h2>" . " Benvenuto " . $username . "</h2>";
     ?>
     <p>
-        <a href="index.php">Home</a>
+        <a href="../index.php">Home</a>
     </p>
     <div id="errorContainer"></div>
     <section id="articles">
@@ -39,10 +38,10 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
         <h2>le proposte che hai inviato</h2>
     </section>
     <div>
-        <a href="authentication/login.html">go to login</a>
+        <a href="../authentication/login.html">go to login</a>
     </div>
     <div>
-        <a href="authentication/signup.html">go to signup</a>
+        <a href="../authentication/signup.html">go to signup</a>
     </div>
 </body>
 

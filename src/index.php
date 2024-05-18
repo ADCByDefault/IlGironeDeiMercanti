@@ -41,7 +41,7 @@ include_once "class/Response.php";
             ";
     } else {
         echo "<p><a href=\"authentication/logout.php\">logout</a></p>";
-        echo "<p><a href=\"dashboard.php\">dashboard</a></p>";
+        echo "<p><a href=\"dashboard/dashboard.php\">dashboard</a></p>";
     }
     ?>
     <main>
