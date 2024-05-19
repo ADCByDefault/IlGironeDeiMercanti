@@ -56,6 +56,9 @@ function getArticle($conn, $article_id)
 function getArticleWithProposals($conn, $article_id)
 {
     $data = getArticle($conn, $article_id);
+    if ($data == null) {
+        return null;
+    }
     $proposals = [];
     $sql = "SELECT * FROM proposals
             JOIN users ON proposals.user_id = users.user_id
@@ -71,4 +74,15 @@ function getArticleWithProposals($conn, $article_id)
     }
     $data["proposals"] = $proposals;
     return $data;
+}
+
+function getArticleUser($conn, $article_id)
+{
+    $sql = "SELECT user_id FROM articles
+            WHERE article_id = $article_id";
+    $res = $conn->query($sql);
+    if ($res->num_rows < 0) {
+        return null;
+    }
+    return $res->fetch_assoc()["user_id"];
 }
