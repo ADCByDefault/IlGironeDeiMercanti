@@ -16,10 +16,6 @@ $article_id = null;
 if (isset($_GET['article_id'])) {
     $article_id = $_GET['article_id'];
 }
-$article_user_id = null;
-if (isset($_GET['user_id'])) {
-    $article_user_id = $_GET['user_id'];
-}
 
 if ($article_id == null) {
     Response::send(451); // article_id not found
@@ -28,7 +24,8 @@ if ($article_id == null) {
 
 $data = null;
 try {
-    if ($article_user_id == $request_user_id || $request_user_id == null) {
+    $article_user_id = getArticleUserId($conn, $article_id);
+    if ($article_user_id == $request_user_id && $request_user_id != null) {
         $data = getArticleWithProposals($conn, $article_id);
     } else {
         $data = getArticle($conn, $article_id);

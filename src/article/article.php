@@ -13,24 +13,25 @@
 </head>
 
 <body>
+    <div>
+        <a href="../index.php">home</a>
+    </div>
+    <div class="error-container" id="errorContainer"></div>
     <header>
         <h1 class="name" id="name">Articolo</h1>
         <p class="username" id="username">username</p>
     </header>
     <main>
-        <section>
-            <p class="description" id="description">
-                descrizione dell'articolo
-            </p>
-            <p>14/07/1397</p>
+        <section class="content">
+            <div>
+                <p class="description" id="description">
+                    descrizione dell'articolo
+                </p>
+                <p class="created_at" id="created_at">14/07/1397</p>
+            </div>
+            <div class="images-container" id="imagesContainer"></div>
         </section>
-        <section class="image-container" id="imageContainer">
-            <img src="https://images.unsplash.com/photo-1567801527748-5225c65c5b91?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-            <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-            <img src="https://images.unsplash.com/photo-1503190766327-73a7d9e9e844?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-        </section>
-        <section>
-            <p>da mostrare solo se utente login != utente articolo</p>
+        <section class="make-proposal" id="makeProposal">
             <h2>Fai una proposta</h2>
             <form action="" id="proposalForm">
                 <div>
@@ -44,9 +45,8 @@
                 <button type="submit">invia</button>
             </form>
         </section>
-        <section class="proposals" id="proposals">
-            <p>da mostrare solo se utente login == utente articolo</p>
-            <div class="proposal">
+        <section class="proposals-container" id="proposalsContainer">
+            <!-- <div class="proposal">
                 <p>prezzo: 100</p>
                 <p>descrizione: proposta</p>
                 <p>username</p>
@@ -56,7 +56,7 @@
                 <form action="">
                     <button>Accetta</button>
                 </form>
-            </div>
+            </div> -->
         </section>
     </main>
 </body>

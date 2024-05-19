@@ -76,7 +76,7 @@ function getArticleWithProposals($conn, $article_id)
     return $data;
 }
 
-function getArticleUser($conn, $article_id)
+function getArticleUserId($conn, $article_id)
 {
     $sql = "SELECT user_id FROM articles
             WHERE article_id = $article_id";
