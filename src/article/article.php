@@ -33,14 +33,11 @@
         </section>
         <section class="make-proposal" id="makeProposal">
             <h2>Fai una proposta</h2>
-            <form action="" id="proposalForm">
+            <form action="makeProposal.php" method="post" id="proposalForm">
+                <input >
                 <div>
                     <label for="price">prezzo</label>
                     <input type="text" id="price" name="price" maxlength="16" />
-                </div>
-                <div>
-                    <label for="description">descrizione</label>
-                    <textarea name="description" id="description" cols="30" rows="10"></textarea>
                 </div>
                 <button type="submit">invia</button>
             </form>

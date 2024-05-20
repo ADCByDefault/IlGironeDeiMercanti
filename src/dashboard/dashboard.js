@@ -46,11 +46,15 @@ function createArticle(article) {
     type.textContent = article.type;
     const created_at = document.createElement("p");
     created_at.classList.add("created_at");
+    const link = document.createElement("a");
+    link.textContent = "vai al articolo";
+    link.href = "../article/article.php?article_id=" + article.article_id;
     created_at.textContent = article.created_at;
     articleElement.appendChild(name);
     articleElement.appendChild(description);
     articleElement.appendChild(type);
     articleElement.appendChild(created_at);
+    articleElement.appendChild(link);
     return articleElement;
 }
 
@@ -94,9 +98,13 @@ function createProposal(proposal) {
     const created_at = document.createElement("p");
     created_at.classList.add("created_at");
     created_at.textContent = proposal.created_at;
+    const link = document.createElement("a");
+    link.textContent = "vai al articolo";
+    link.href = "../article/article.php?article_id=" + proposal.article_id;
     proposalElement.appendChild(proposal_id);
     proposalElement.appendChild(article_id);
     proposalElement.appendChild(price);
     proposalElement.appendChild(created_at);
+    proposalElement.appendChild(link);
     return proposalElement;
 }

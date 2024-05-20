@@ -17,7 +17,7 @@ include_once "class/Response.php";
     <link rel="stylesheet" href="index.css">
 </head>
 
-<body>
+<body class="position-relative">
     <nav class="navbar bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand text-light">Il Girone <br>dei Mercanti
@@ -35,19 +35,20 @@ include_once "class/Response.php";
     }
     if (!$user_id) {
         echo "
-                <p>skibidi Toilet</p>
+                <p>prima di vedere le offerte accedi al sito o registrati</p>
                 <p><a href=\"authentication/login.html\">login</a></p>
                 <p><a href=\"authentication/signup.html\">singup</a></p>
             ";
     } else {
-        echo "<p><a href=\"authentication/logout.php\">logout</a></p>";
-        echo "<p><a href=\"dashboard/dashboard.php\">dashboard</a></p>";
-    }
-    ?>
-    <main>
-        <div class="error-container" id="errorContainer"></div>
-        <div class="articles-container" id="articlesContainer"></div>
-    </main>
-</body>
-
-</html>
+        echo "<p><a href=\"authentication/logout.php\">logout</a></p>
+            <p><a href=\"dashboard/dashboard.php\">dashboard</a></p>";
+        }
+        ?>
+        
+        <main>
+            <div class="error-container" id="errorContainer"></div>
+            <div class="articles-container" id="articlesContainer"></div>
+        </main>
+        </body>
+        
+        </html>

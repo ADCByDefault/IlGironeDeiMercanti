@@ -81,3 +81,13 @@ function setProposals(proposals) {
         proposalsContainer.appendChild(proposalElement);
     });
 }
+
+makeProposal.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const response = await fetch("login.php", {
+        method: "POST",
+        body: formData,
+    });
+    
+})
