@@ -16,3 +16,11 @@ image {
     width: 90%;
     height: auto;
 }
+
+.error_conteiner{
+    color: red;
+}
+
+.information-container{
+    color: green;
+}

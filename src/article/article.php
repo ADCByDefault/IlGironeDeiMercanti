@@ -1,6 +1,3 @@
-<?php
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +14,7 @@
         <a href="../index.php">home</a>
     </div>
     <div class="error-container" id="errorContainer"></div>
+    <div class="information-container" id="informationContainer"></div>
     <header>
         <h1 class="name" id="name">Articolo</h1>
         <p class="username" id="username">username</p>
@@ -34,7 +32,7 @@
         <section class="make-proposal" id="makeProposal">
             <h2>Fai una proposta</h2>
             <form action="makeProposal.php" method="post" id="proposalForm">
-                <input >
+                <input type="number" name="article_id" id="article_id" hidden>
                 <div>
                     <label for="price">prezzo</label>
                     <input type="text" id="price" name="price" maxlength="16" />
@@ -43,17 +41,6 @@
             </form>
         </section>
         <section class="proposals-container" id="proposalsContainer">
-            <!-- <div class="proposal">
-                <p>prezzo: 100</p>
-                <p>descrizione: proposta</p>
-                <p>username</p>
-                <form action="">
-                    <button>Rifiuta</button>
-                </form>
-                <form action="">
-                    <button>Accetta</button>
-                </form>
-            </div> -->
         </section>
     </main>
 </body>

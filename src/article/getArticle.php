@@ -15,6 +15,7 @@ if (isset($_SESSION['user_id'])) {
 $article_id = null;
 if (isset($_GET['article_id'])) {
     $article_id = $_GET['article_id'];
+    $_SESSION["article_id"] = $article_id;
 }
 
 if ($article_id == null) {
