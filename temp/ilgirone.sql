@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 17, 2024 alle 13:47
--- Versione del server: 10.4.28-MariaDB
--- Versione PHP: 8.2.4
+-- Creato il: Mag 23, 2024 alle 01:43
+-- Versione del server: 10.4.32-MariaDB
+-- Versione PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,7 +43,10 @@ CREATE TABLE `articles` (
 INSERT INTO `articles` (`article_id`, `user_id`, `type_id`, `name`, `description`, `created_at`) VALUES
 (1, 8, 6, 'succi', 'succi gay schiavo degli ebrei', '2024-05-11 16:39:29'),
 (2, 5, 6, 'elitropia', 'vendo elitropia trovata nel mugn', '2024-05-11 16:41:28'),
-(3, 5, 2, 'fenta', 'micro dose', '2024-05-11 19:18:04');
+(3, 5, 2, 'fenta', 'micro dose', '2024-05-11 19:18:04'),
+(39, 1, 1, 'ciao', 'udzbhjzbdh', '2024-05-22 23:37:24'),
+(40, 1, 1, 'breadbord', 'ffff', '2024-05-22 23:38:34'),
+(41, 1, 1, 'breadbord', 'jnnn', '2024-05-22 23:40:19');
 
 -- --------------------------------------------------------
 
@@ -66,7 +69,10 @@ INSERT INTO `images` (`image_id`, `article_id`, `image_url`) VALUES
 (4, 3, 'upload/fenta_02.webp'),
 (5, 3, 'upload/fenta_03.webp'),
 (6, 2, 'upload/9b49aefb-94d0-4331-aa60-8abcc048d331.jpg'),
-(7, 2, 'upload/f4fb75c9-02b8-4e1b-ad98-35afe5226667.jpg');
+(7, 2, 'upload/f4fb75c9-02b8-4e1b-ad98-35afe5226667.jpg'),
+(34, 1, '../../upload/breadB.jpg'),
+(35, 1, '../../upload/breadB.jpg'),
+(36, 1, 'upload/breadB.jpg');
 
 -- --------------------------------------------------------
 
@@ -87,7 +93,8 @@ CREATE TABLE `proposals` (
 --
 
 INSERT INTO `proposals` (`proposal_id`, `user_id`, `article_id`, `price`, `created_at`) VALUES
-(1, 8, 3, '1 melodioni di €', '2024-05-11 20:50:12');
+(1, 8, 3, '1 melodioni di €', '2024-05-11 20:50:12'),
+(2, 8, 3, '12', '2024-05-22 21:21:34');
 
 -- --------------------------------------------------------
 
@@ -139,7 +146,8 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `image_id`, `email`, `fi
 (4, 'tumultuoso1378', '003d8212504fe979b5ad227869bf63c801e32a59920820c1be455d4157e9d3e6', NULL, 'tintore@fi.com', 'ciompo', 'tintore', '2024-05-10 01:37:21'),
 (5, 'governatoreDirezionale', '549954f9ed1f6f6f7aeeacbe69187f99159e1b1c17057e4807acf760b93e8611', NULL, 'giano@comune.fi.com', 'giano', 'della bella', '2024-05-10 01:39:32'),
 (6, 'elitropiaFinder2000', '828b0d9743aaba2d4150982570110d6f4237b712809b01745540ec47296732b0', NULL, 'ardiAndrew@cdm.fi.com', 'Mr.Andreuccio', NULL, '2024-05-10 01:42:55'),
-(8, 'taitElSamuel', '9886c6407c4758bb1e3d327a5529ddf0cef70eef6a8833e85b6ca7cf622a92ba', NULL, 'ElSamuel@signa.it', 'Sig.Samuel', '', '2024-05-11 02:52:51');
+(8, 'taitElSamuel', '9886c6407c4758bb1e3d327a5529ddf0cef70eef6a8833e85b6ca7cf622a92ba', NULL, 'ElSamuel@signa.it', 'Sig.Samuel', '', '2024-05-11 02:52:51'),
+(9, 'ciompoide', '73624f5cf4ec36771bc800d250b0ac5a8faf0250317238a2367a8208c9d18f20', NULL, 'ardi@andreu.com', 'ciompoide', 'ciompo', '2024-05-23 00:06:48');
 
 --
 -- Indici per le tabelle scaricate
@@ -192,19 +200,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT per la tabella `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT per la tabella `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT per la tabella `proposals`
 --
 ALTER TABLE `proposals`
-  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `types`
@@ -216,7 +224,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Limiti per le tabelle scaricate

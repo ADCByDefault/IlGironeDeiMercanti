@@ -6,9 +6,7 @@
     $user_id = $_SESSION["user_id"];
     $article_id = $_POST["article_id"];
 
-    if($_POST["price"] === null){
-        sleep(3);
-
+    if($_POST["price"] !== null){
         $price = $_POST["price"];
 
         $sql = "INSERT INTO proposals (user_id, article_id, price) value('$user_id', '$article_id', '$price')";

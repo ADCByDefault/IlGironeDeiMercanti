@@ -5,7 +5,7 @@ body {
 }
 .articles-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 20rem);
+    grid-template-columns: repeat(auto-fill, 12rem);
     gap: 1rem;
 }
 
@@ -42,8 +42,10 @@ body {
     padding: 0.5rem;
 }
 
-
-.registrazione{
+body {
+    height: 100vh;
     text-align: center;
-    
+}
+nav {
+    text-align: left;
 }

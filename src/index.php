@@ -20,12 +20,19 @@ include_once "class/Response.php";
 <body class="position-relative">
     <nav class="navbar bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-light">Il Girone <br>dei Mercanti
+            <a class="navbar-brand text-light">
+                Il Girone <br>dei Mercanti
+            </a>
+            <a class="navbar-brand text-light" href="addArticle/addArticle.php">
+                aggiungi articolo
             </a>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search">
                 <button class="btn btn-outline-success text-light" type="submit">Search</button>
             </form>
+            <a class="navbar-brand" href="#">
+                <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" width="30" height="24">
+            </a>
         </div>
     </nav>
     <?php
@@ -35,20 +42,22 @@ include_once "class/Response.php";
     }
     if (!$user_id) {
         echo "
+            <div class=\"position-absolute top-50 start-50 translate-middle\">
                 <p>prima di vedere le offerte accedi al sito o registrati</p>
-                <p><a href=\"authentication/login.html\">login</a></p>
-                <p><a href=\"authentication/signup.html\">singup</a></p>
+                <p><a href=\"authentication/login.html\">login</a> <a href=\"authentication/signup.html\">singup</a></p>
+            </div>
             ";
     } else {
-        echo "<p><a href=\"authentication/logout.php\">logout</a></p>
-            <p><a href=\"dashboard/dashboard.php\">dashboard</a></p>";
+        echo "
+            <p><a href=\"authentication/logout.php\">logout</a></p>
+            <p><a href=\"dashboard/dashboard.php\">dashboard</a></p>
+            <main>
+                <div class=\"error-container\" id=\"errorContainer\"></div>
+                <div class=\"articles-container\" id=\"articlesContainer\"></div>
+            </main>";
         }
         ?>
         
-        <main>
-            <div class="error-container" id="errorContainer"></div>
-            <div class="articles-container" id="articlesContainer"></div>
-        </main>
         </body>
         
         </html>
