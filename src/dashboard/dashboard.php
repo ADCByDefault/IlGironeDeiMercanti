@@ -1,5 +1,10 @@
 <?php
 include_once "../authentication/connessione.php";
+if (!isset($_SESSION["user_id"])) {
+    $_SESSION["error"] = "devi fare il login";
+    header("Location: ../authentication/loginPage.php");
+    exit();
+}
 $user_id = $_SESSION["user_id"];
 $sql = "SELECT username FROM users WHERE user_id = $user_id";
 $username = $conn->query($sql)->fetch_assoc()["username"];
@@ -38,10 +43,10 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
         <h2>le proposte che hai inviato</h2>
     </section>
     <div>
-        <a href="../authentication/login.html">go to login</a>
+        <a href="../authentication/loginPage.php">go to login</a>
     </div>
     <div>
-        <a href="../authentication/signup.html">go to signup</a>
+        <a href="../authentication/signupPage.php">go to signup</a>
     </div>
 </body>
 

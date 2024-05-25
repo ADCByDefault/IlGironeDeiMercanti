@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +17,15 @@
     </header>
     <main>
         <div class="mainDiv">
-            <div id="errorContainer"></div>
+            <div id="errorContainer">
+                <?php
+
+                if (isset($_SESSION["error"])) {
+                    echo "<p>" . $_SESSION["error"] . "</p>";
+                }
+                unset($_SESSION["error"]);
+                ?>
+            </div>
             <form action="login.php" method="post" id="loginForm">
                 <div>
                     <label for="username">Username</label>
@@ -32,7 +43,7 @@
             </form>
             <div>
                 <br>
-                <a href="../index.php">home</a>
+                <a href="signupPage.php">Registrati</a>
             </div>
         </div>
     </main>
@@ -69,4 +80,5 @@
         errorContainer.textContent = message;
     });
 </script>
+
 </html>

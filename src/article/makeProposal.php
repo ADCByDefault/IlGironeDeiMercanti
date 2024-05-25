@@ -1,21 +1,26 @@
 <?php
 
-    include_once "../authentication/connessione.php";
-    include_once "../class/Response.php";
+include_once "../authentication/connessione.php";
+include_once "../class/Response.php";
 
-    $user_id = $_SESSION["user_id"];
-    $article_id = $_POST["article_id"];
+if (!isset($_SESSION["user_id"]) || !isset($_POST["article_id"])) {
+    $res = new Response(451); //user or article not found
+    echo $res->json();
+    die();
+}
 
-    if($_POST["price"] !== null){
-        $price = $_POST["price"];
+$user_id = $_SESSION["user_id"];
+$article_id = $_POST["article_id"];
 
-        $sql = "INSERT INTO proposals (user_id, article_id, price) value('$user_id', '$article_id', '$price')";
-        $result = $conn -> query($sql);
+if (!isset($_POST["price"])) {
+    $res = new Response(452); // price not found
+    echo $res->json();
+    die();
+}
+$price = $_POST["price"];
 
-        $res = new Response("251");
-        echo $res -> json();
+$sql = "INSERT INTO proposals (user_id, article_id, price) value('$user_id', '$article_id', '$price')";
+$result = $conn->query($sql);
 
-    }else{
-        $res = new Response("452");
-        echo $res -> json();
-    }
+$res = new Response(251);
+echo $res->json();

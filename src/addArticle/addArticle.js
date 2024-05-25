@@ -12,12 +12,15 @@ addArticle.addEventListener("submit", async (e) => {
         method: "POST",
         body: formData,
     });
-    const json = await response.text();
+    const json = await response.json();
     console.log(json);
-    return;
+    // const article_id = json["data"]["article_id"];
+    const article_id = json.data.article_id;
+    console.log(article_id);
     if (json.status == 251) {
-        informationContainer.textContent =
-            "articolo agginto alla listacon successo";
+        window.location.replace(
+            "../article/article.php?article_id=" + article_id
+        );
     } else if (json.status == 451) {
         errorContainer.textContent = "riempi tutti i campi";
         return;

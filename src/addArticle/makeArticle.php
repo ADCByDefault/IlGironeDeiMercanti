@@ -9,7 +9,7 @@
         return;
     }
 
-    if(isset($_FILES["img"])) 
+    if(isset($_FILES["img"]))
         $img = $_FILES["img"]["name"];
     //TODO filtrare solo immagini
     if(isset($_POST["nome"])) 
@@ -21,15 +21,6 @@
         echo $res -> json();
         return;
     }
-
-    $description = $_POST["descrizione"];
-
-    $sql = "INSERT INTO articles (user_id, type_id, name, description) VALUE ({$_SESSION["user_id"]}, $type, '$name', '$description')";
-    $conn -> query($sql);
-
-    $sql = "INSERT INTO images (article_id, image_url) VALUE ($type, 'upload/$img')";
-    $conn -> query($sql);
-
     $temp = $_FILES["img"]["tmp_name"];
     if(!move_uploaded_file($temp, "../../upload/$img")){
         $res = new Response("452");
@@ -37,5 +28,19 @@
         return;
     }
 
-    $res = new Response("251");
+    $description = $_POST["descrizione"];
+
+    $sql = "INSERT INTO articles (user_id, type_id, name, description) VALUE ({$_SESSION["user_id"]}, $type, '$name', '$description')";
+    $conn -> query($sql);
+
+    $sql = "SELECT max(article_id) FROM articles";
+    $result = $conn -> query($sql);
+
+    $article_id = $result -> fetch_assoc()["max(article_id)"];
+
+    $sql = "INSERT INTO images (article_id, image_url) VALUE ($article_id, 'upload/$img')";
+    $conn -> query($sql);
+
+
+    $res = new Response("251",["article_id"=>$article_id]);
     echo $res -> json();

@@ -2,31 +2,39 @@
 include_once "../authentication/connessione.php";
 include_once "../class/Response.php";
 include_once "../utils/articleMethods.php";
-$request_username = null;
-$request_user_id = null;
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-    $sql = "SELECT username FROM users
-            WHERE user_id = $user_id";
-    $res = $conn->query($sql);
-    $request_user_id = $user_id;
-    $request_username = $res->fetch_assoc()["username"];
-}
-$article_id = null;
-if (isset($_GET['article_id'])) {
-    $article_id = $_GET['article_id'];
-    $_SESSION["article_id"] = $article_id;
-}
 
-if ($article_id == null) {
+
+if (!isset($_SESSION["user_id"])) {
+    $response = new Response(453); // user not found
+    echo $response->json();
+    exit();
+}
+$user_id = $_SESSION['user_id'];
+$request_user_id = $user_id;
+$request_username = null;
+$sql = "SELECT username FROM users
+            WHERE user_id = $user_id";
+$res = $conn->query($sql);
+$request_username = $res->fetch_assoc()["username"];
+
+
+if (!isset($_GET['article_id'])) {
     Response::send(451); // article_id not found
+    exit();
+}
+$article_id = $_GET['article_id'];
+$sql = "SELECT article_id FROM articles
+            WHERE article_id = $article_id";
+$res = $conn->query($sql);
+if ($res->num_rows <= 0) {
+    Response::send(452); // article not found
     exit();
 }
 
 $data = null;
 try {
     $article_user_id = getArticleUserId($conn, $article_id);
-    if ($article_user_id == $request_user_id && $request_user_id != null) {
+    if ($article_user_id == $request_user_id) {
         $data = getArticleWithProposals($conn, $article_id);
     } else {
         $data = getArticle($conn, $article_id);
