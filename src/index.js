@@ -17,6 +17,7 @@ async function getAllArticles() {
                 const articleElement = createArticle(article);
                 articlesContainer.appendChild(articleElement);
             });
+            errorContainer.textContent = "";
             return;
         }
         if (data.status == "551") {
@@ -48,7 +49,8 @@ function createArticle(article) {
     user.textContent = article.username;
     const link = document.createElement("a");
     link.href = "article/article.php?article_id=" + article.article_id;
-    link.textContent = "vai all'articolo";
+    link.innerHTML = "vai all'articolo &rarr;";
+    link.classList.add("link");
     const images = createImages(article.images);
     // appending
     const contentContainer = document.createElement("div");

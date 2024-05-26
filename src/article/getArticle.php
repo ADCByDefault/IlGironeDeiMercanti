@@ -12,6 +12,7 @@ if (!isset($_SESSION["user_id"])) {
 $user_id = $_SESSION['user_id'];
 $request_user_id = $user_id;
 $request_username = null;
+$user_id = mysqli_real_escape_string($conn, $user_id);
 $sql = "SELECT username FROM users
             WHERE user_id = $user_id";
 $res = $conn->query($sql);
@@ -23,6 +24,7 @@ if (!isset($_GET['article_id'])) {
     exit();
 }
 $article_id = $_GET['article_id'];
+$article_id = mysqli_real_escape_string($conn, $article_id);
 $sql = "SELECT article_id FROM articles
             WHERE article_id = $article_id";
 $res = $conn->query($sql);

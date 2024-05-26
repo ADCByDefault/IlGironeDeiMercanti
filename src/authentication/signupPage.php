@@ -69,7 +69,7 @@
         let message;
         if (data.status == "251") {
             message = "utente creato, reindirizzamento...";
-            window.location.replace("../index.php");
+            window.location.replace("../dashboard/dashboard.php");
         } else if (data.status == "451") {
             message = "email o username già in uso";
         } else if (data.status == "452") {

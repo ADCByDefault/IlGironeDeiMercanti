@@ -27,5 +27,9 @@ addArticle.addEventListener("submit", async (e) => {
     } else if (json.status == 452) {
         errorContainer.textContent = "errore nell'inserimento dell'immagine";
         return;
+    } else if (json.status == 453) {
+        errorContainer.textContent = "l'estenzione del file non e' supportata";
+        console.log("ciao");
+        return;
     }
 });

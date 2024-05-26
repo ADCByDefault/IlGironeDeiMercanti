@@ -18,12 +18,13 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <script src="dashboard.js" defer></script>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
     <header>
         <h1>
-            Il Gran coglione Dei Mercanti
+            Il Girone Dei Mercanti
         </h1>
     </header>
     <?php

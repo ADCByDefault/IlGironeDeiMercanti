@@ -73,6 +73,12 @@ function setProposals(proposals) {
     proposals.forEach((proposal) => {
         const proposalElement = document.createElement("div");
         proposalElement.classList.add("proposal");
+        if (proposal.status == 1) {
+            proposalElement.style.backgroundColor = "green";
+        }
+        if (proposal.status == -1) {
+            proposalElement.style.backgroundColor = "red";
+        }
         const usernameElement = document.createElement("p");
         usernameElement.textContent = proposal.username;
         const priceElement = document.createElement("p");
@@ -80,39 +86,66 @@ function setProposals(proposals) {
         const createdAtElement = document.createElement("p");
         createdAtElement.textContent = proposal.created_at;
 
-        const decline = document.createElement("button");
-        decline.setAttribute("data-proposal_id", proposal.proposal_id);
-        decline.textContent = "rifiuta";
-        decline.addEventListener("click",async (e) => {
-            e.preventDefault();
-            const proposal_id = e.target.getAttribute("data-proposal_id");
-            const response = await fetch("declineProposal.php", {
-                method: "POST",
-                body: JSON.stringify({ proposal_id }),
-            });
-            const json = await response.text();
-            console.log(json);
-        });
-        const accept = document.createElement("button");
-        accept.setAttribute("data-proposal_id", proposal.proposal_id);
-        accept.textContent = "accetta";
-        accept.addEventListener("click",async (e) => {
-            e.preventDefault();
-            const proposal_id = e.target.getAttribute("data-proposal_id");
-            const response = await fetch("acceptProposal.php", {
-                method: "POST",
-                body: JSON.stringify({ proposal_id }),
-            });
-            const json = await response.text();
-            console.log(json);
-        });
-
+        const acceptForm = makeAcceptOrDeclineForms(
+            proposal.proposal_id,
+            "acceptProposal.php",
+            proposal.status
+        );
+        addListenerToForm(acceptForm, "acceptProposal.php");
+        const declineForm = makeAcceptOrDeclineForms(
+            proposal.proposal_id,
+            "declineProposal.php",
+            proposal.status
+        );
+        addListenerToForm(declineForm, "declineProposal.php");
         proposalElement.appendChild(usernameElement);
         proposalElement.appendChild(priceElement);
         proposalElement.appendChild(createdAtElement);
-        proposalElement.appendChild(decline);
-        proposalElement.appendChild(accept);
+        proposalElement.appendChild(acceptForm);
+        proposalElement.appendChild(declineForm);
         proposalsContainer.appendChild(proposalElement);
+    });
+}
+function makeAcceptOrDeclineForms(proposal_id, action, status) {
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = action;
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "proposal_id";
+    hiddenInput.value = proposal_id;
+    form.appendChild(hiddenInput);
+    const button = document.createElement("button");
+    button.textContent = "rifiuta";
+    if (action == "acceptProposal.php") {
+        button.textContent = "accetta";
+    }
+    if (status != 0) {
+        button.disabled = true;
+    } else {
+        form.appendChild(button);
+    }
+    return form;
+}
+function addListenerToForm(form, action) {
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        while (proposalsContainer.firstChild) {
+            proposalsContainer.removeChild(proposalsContainer.firstChild);
+        }
+        proposalsContainer.textContent = "loading...";
+        const buttons = Array.from(document.querySelectorAll("button"));
+        buttons.forEach((button) => {
+            button.disabled = true;
+        });
+        const formData = new FormData(form);
+        const response = await fetch(action, {
+            method: form.method,
+            body: formData,
+        });
+        const json = await response.text();
+        console.log(json);
+        location.reload();
     });
 }
 
@@ -138,5 +171,7 @@ makeProposal.addEventListener("submit", async (e) => {
         return;
     } else if (json.status == 452) {
         errorContainer.textContent = "non è stata scelta nessuna proposta";
+    } else if (json.status == 454) {
+        errorContainer.textContent = "una proposta è già stata accettata";
     }
 });

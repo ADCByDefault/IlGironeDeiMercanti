@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION["user_id"])){
+if (!isset($_SESSION["user_id"])) {
     header("Location: ../index.php");
     die();
 }
@@ -12,6 +12,7 @@ if(!isset($_SESSION["user_id"])){
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>articolo</title>
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="article.css">
     <script src="article.js" defer></script>
 </head>

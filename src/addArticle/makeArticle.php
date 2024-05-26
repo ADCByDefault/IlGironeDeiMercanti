@@ -9,18 +9,29 @@
         return;
     }
 
-    if(isset($_FILES["img"]))
+    if(isset($_FILES["img"])){
         $img = $_FILES["img"]["name"];
-    //TODO filtrare solo immagini
-    if(isset($_POST["nome"])) 
-        $name = $_POST["nome"];
-    if(isset($_POST["type"]))
-        $type = $_POST["type"];
+        $imageFileType = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "webp"){
+            $res = new Response("453");
+            echo $res -> json();
+            return; 
+        }
+    }
     else {
         $res = new Response("451");
         echo $res -> json();
         return;
     }
+    //TODO filtrare solo immagini
+    if($_POST["nome"] != "" && isset($_POST["type"])) 
+        $name = $_POST["nome"];
+    else {
+        $res = new Response("451");
+        echo $res -> json();
+        return;
+    }
+
     $temp = $_FILES["img"]["tmp_name"];
     if(!move_uploaded_file($temp, "../../upload/$img")){
         $res = new Response("452");

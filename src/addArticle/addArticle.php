@@ -13,6 +13,7 @@ if (!isset($_SESSION["user_id"])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>articolo</title>
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="addArticle.css">
     <script src="addArticle.js" defer></script>
 </head>
@@ -28,6 +29,7 @@ if (!isset($_SESSION["user_id"])) {
             <h2>aggiungi il tuo articolo</h2>
             <form action="makeArticle.php" method="post" id="articleForm" enctype="multipart/form-data">
                 <input type="file" name="img" id="img">
+                <p>estensioni consentite -> .jpg .jpeg .png .gif . webp</p>
                 <br><br>
                 <input type="text" name="nome" placeholder="articolo">
                 <input type="text" name="descrizione" placeholder="breve descrizione">

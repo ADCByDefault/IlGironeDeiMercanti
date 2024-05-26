@@ -69,7 +69,8 @@ function getArticleWithProposals($conn, $article_id)
             "username" => $row["username"],
             "proposal_id" => $row["proposal_id"],
             "price" => $row["price"],
-            "created_at" => $row["created_at"]
+            "created_at" => $row["created_at"],
+            "status" => $row["status"]
         ];
     }
     $data["proposals"] = $proposals;

@@ -25,12 +25,12 @@ if (!isset($_SESSION["user_id"])) {
     </nav>
     <Header>
         <h1>Benvenuto nel Girone dei Mercanti</h1>
-        <p><a href="authentication/logout.php">logout</a></p>
-        <p><a href="dashboard/dashboard.php">dashboard</a></p>
-        <p><a href="addArticle/addArticle.php">aggiungi articolo</a></p>
+        <p><a class="link" href="authentication/logout.php">logout &#9758;</a></p>
+        <p><a class="link" href="dashboard/dashboard.php">dashboard &#9978;</a></p>
+        <p><a class="link" href="addArticle/addArticle.php">aggiungi articolo &#9741;</a></p>
     </Header>
     <main>
-        <div class="error-container" id="errorContainer"></div>
+        <div class="error-container" id="errorContainer">Loading...</div>
         <div class="articles-container" id="articlesContainer"></div>
     </main>
 

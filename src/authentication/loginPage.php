@@ -69,8 +69,8 @@ session_start();
         errorContainer.textContent = data;
         let message;
         if (data.status == "252") {
-            message = "Hai fatto il login, verrai reindirizzato alla home fra poco";
-            window.location.assign("../index.php");
+            message = "Hai fatto il login, verrai reindirizzato alla tua pagina di profilo fra poco";
+            window.location.assign("../dashboard/dashboard.php");
         } else if (data.status == "453") {
             message = "password sbagliata";
         } else if (data.status == "451") {
