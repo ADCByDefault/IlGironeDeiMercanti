@@ -7,7 +7,8 @@ session_start();
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="log-sing.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="authentication.css">
     <title>Login</title>
 </head>
 
@@ -17,34 +18,35 @@ session_start();
     </header>
     <main>
         <div class="mainDiv">
-            <div id="errorContainer">
-                <?php
-
-                if (isset($_SESSION["error"])) {
-                    echo "<p>" . $_SESSION["error"] . "</p>";
-                }
-                unset($_SESSION["error"]);
-                ?>
-            </div>
-            <form action="login.php" method="post" id="loginForm">
-                <div>
-                    <label for="username">Username</label>
-                    <br>
-                    <input type="text" name="username" id="username" placeholder="username" required />
-                    <br>
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <br>
-                    <input type="password" name="password" id="password" placeholder="password" required />
-                    <br>
-                </div>
-                <button>Invia</button>
-            </form>
+            <?php
+            echo '<div id="errorContainer" class="error-container">';
+            if (isset($_SESSION["error"])) {
+                echo "<p>" . $_SESSION["error"] . "</p>";
+            }
+            echo "</div>";
+            unset($_SESSION["error"]);
+            ?>
+        </div>
+        <form class="login-form" action="login.php" method="post" id="loginForm">
             <div>
+                <label class="label" for="username">Username</label>
                 <br>
-                <a href="signupPage.php">Registrati</a>
+                <input class="input" type="text" name="username" id="username" placeholder="username" required />
+                <br>
             </div>
+            <div>
+                <label class="label" for="password">Password</label>
+                <br>
+                <input class="input" type="password" name="password" id="password" placeholder="password" required />
+                <br>
+            </div>
+            <div>
+                <button class="btn">Invia</button>
+            </div>
+        </form>
+        <div>
+            <a href="signupPage.php" class="link">Registrati &rarr;</a>
+        </div>
         </div>
     </main>
 </body>
@@ -53,7 +55,7 @@ session_start();
     const errorContainer = document.getElementById("errorContainer");
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        errorContainer.textContent = "";
+        errorContainer.textContent = "Loading...";
         const formData = new FormData(form);
         const response = await fetch("login.php", {
             method: "POST",
@@ -67,7 +69,7 @@ session_start();
         errorContainer.textContent = data;
         let message;
         if (data.status == "252") {
-            message = "hai fatto il login";
+            message = "Hai fatto il login, verrai reindirizzato alla home fra poco";
             window.location.assign("../index.php");
         } else if (data.status == "453") {
             message = "password sbagliata";

@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign up</title>
-    <link rel="stylesheet" href="log-sing.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="authentication.css">
 </head>
 
 <body>
@@ -13,77 +14,70 @@
         <h1>Pagina Signup</h1>
     </header>
     <main>
-        <div class="mainDiv">
-            <div id="errorContainer"></div>
-            <form action="signup.php" method="post" id="signupForm">
-                <div>
-                    <label for="first_name">nome</label>
-                    <br>
-                    <input type="text" name="first_name" id="first_name" placeholder="first_name" />
-                </div>
-                <div>
-                    <label for="last_______names">cognome</label>
-                    <br>
-                    <input type="text" name="last_name" id="last_name" placeholder="last_name" />
-                </div>
-                <div>
-                    <label for="username">username</label>
-                    <br>
-                    <input type="text" name="username" id="username" placeholder="username" required />
-                </div>
-                <div>
-                    <label for="email">email</label>
-                    <br>
-                    <input type="email" name="email" id="email" placeholder="email" />
-                </div>
-                <div>
-                    <label for="password">password</label>
-                    <br>
-                    <input type="password" name="password" id="password" placeholder="password" required />
-                </div>
-                <div>
-                    <label for="conferma">conferma password</label>
-                    <br>
-                    <input type="password" name="conferma" id="conferma" placeholder="password" required />
-                </div>
-                <br>
-                <button>Invio</button>
-            </form>
+        <div class="error-container" id="errorContainer"></div>
+        <form action="signup.php" method="post" class="signup-form" id="signupForm">
             <div>
-                <br>
-                <a href="loginPage.php">Accedi</a>
+                <label for="first_name">nome</label>
+                <input class="input" type="text" name="first_name" id="first_name" placeholder="Mario" />
             </div>
+            <div>
+                <label for="last_names">cognome</label>
+                <input class="input" type="text" name="last_name" id="last_name" placeholder="Sturniolo" />
+            </div>
+            <div>
+                <label for="username">username</label>
+                <input class="input" type="text" name="username" id="username" placeholder="sonoMarioSturniolo" required />
+            </div>
+            <div>
+                <label for="email">email</label>
+                <input class="input" type="email" name="email" id="email" placeholder="sono@mario.sturniolo" />
+            </div>
+            <div>
+                <label for="password">password</label>
+                <input class="input" type="password" name="password" id="password" placeholder="sonoMarioSturniolo" required />
+            </div>
+            <div>
+                <label for="conferma">conferma password</label>
+                <input class="input" type="password" name="conferma" id="conferma" placeholder="sonoMarioSturniolo" required />
+            </div>
+            <button class="btn">Invio</button>
+        </form>
+        <div>
+            <a href="loginPage.php" class="link">&larr; Accedi</a>
         </div>
     </main>
 </body>
 <script>
     const signupForm = document.getElementById("signupForm");
     const errorContainer = document.getElementById("errorContainer");
+    const password = document.getElementById("password");
+    const conferma = document.getElementById("conferma");
 
     signupForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-        errorContainer.textContent = "";
+        if(password.value !== conferma.value){
+            errorContainer.textContent = "le due password non corrispondono";
+            return;
+        }
+        errorContainer.textContent = "Loading...";
         const formData = new FormData(signupForm);
         const response = await fetch("signup.php", {
             method: "POST",
             body: formData,
         });
         const data = await response.json();
-        console.log(response);
-        console.log(data);
         let message;
         if (data.status == "251") {
-            message = "utente creato";
+            message = "utente creato, reindirizzamento...";
             window.location.replace("../index.php");
         } else if (data.status == "451") {
-            message = "email o username già esistenti";
+            message = "email o username già in uso";
         } else if (data.status == "452") {
             message = "le due password non corrispondono";
         }
         else {
-            message = "errore generico";
+            message = "errore sconosciuto";
         }
-        console.log(message);
         errorContainer.textContent = message;
     });
 </script>

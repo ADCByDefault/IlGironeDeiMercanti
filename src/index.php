@@ -17,6 +17,7 @@ if (!isset($_SESSION["user_id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="index.css">
 </head>
 
@@ -24,30 +25,14 @@ if (!isset($_SESSION["user_id"])) {
     </nav>
     <Header>
         <h1>Benvenuto nel Girone dei Mercanti</h1>
+        <p><a href="authentication/logout.php">logout</a></p>
+        <p><a href="dashboard/dashboard.php">dashboard</a></p>
+        <p><a href="addArticle/addArticle.php">aggiungi articolo</a></p>
     </Header>
-    <?php
-    $user_id = null;
-    if (isset($_SESSION["user_id"])) {
-        $user_id = $_SESSION["user_id"];
-    }
-    if (!$user_id) {
-        echo "
-            <div class=\"position-absolute top-50 start-50 translate-middle\">
-                <p>prima di vedere le offerte accedi al sito o registrati</p>
-                <p><a href=\"authentication/loginPage.php\">login</a> <a href=\"authentication/signupPage.php\">singup</a></p>
-            </div>
-            ";
-    } else {
-        echo "
-            <p><a href=\"authentication/logout.php\">logout</a></p>
-            <p><a href=\"dashboard/dashboard.php\">dashboard</a></p>
-            <p><a href=\"addArticle/addArticle.php\">aggiungi articolo</a></p>
-            <main>
-                <div class=\"error-container\" id=\"errorContainer\"></div>
-                <div class=\"articles-container\" id=\"articlesContainer\"></div>
-            </main>";
-    }
-    ?>
+    <main>
+        <div class="error-container" id="errorContainer"></div>
+        <div class="articles-container" id="articlesContainer"></div>
+    </main>
 
 </body>
 

@@ -79,9 +79,39 @@ function setProposals(proposals) {
         priceElement.textContent = proposal.price;
         const createdAtElement = document.createElement("p");
         createdAtElement.textContent = proposal.created_at;
+
+        const decline = document.createElement("button");
+        decline.setAttribute("data-proposal_id", proposal.proposal_id);
+        decline.textContent = "rifiuta";
+        decline.addEventListener("click",async (e) => {
+            e.preventDefault();
+            const proposal_id = e.target.getAttribute("data-proposal_id");
+            const response = await fetch("declineProposal.php", {
+                method: "POST",
+                body: JSON.stringify({ proposal_id }),
+            });
+            const json = await response.text();
+            console.log(json);
+        });
+        const accept = document.createElement("button");
+        accept.setAttribute("data-proposal_id", proposal.proposal_id);
+        accept.textContent = "accetta";
+        accept.addEventListener("click",async (e) => {
+            e.preventDefault();
+            const proposal_id = e.target.getAttribute("data-proposal_id");
+            const response = await fetch("acceptProposal.php", {
+                method: "POST",
+                body: JSON.stringify({ proposal_id }),
+            });
+            const json = await response.text();
+            console.log(json);
+        });
+
         proposalElement.appendChild(usernameElement);
         proposalElement.appendChild(priceElement);
         proposalElement.appendChild(createdAtElement);
+        proposalElement.appendChild(decline);
+        proposalElement.appendChild(accept);
         proposalsContainer.appendChild(proposalElement);
     });
 }
@@ -96,10 +126,17 @@ makeProposal.addEventListener("submit", async (e) => {
     });
     const json = await response.json();
     console.log(json);
+
     if (json.status == 251) {
         informationContainer.textContent = "proposta inviata con successo";
-    }else if(json.status == 451){
+        return;
+    } else if (json.status == 252) {
+        informationContainer.textContent = "proposta accettata";
+        return;
+    } else if (json.status == 451) {
         errorContainer.textContent = "non è stato inserito un prezzo";
         return;
+    } else if (json.status == 452) {
+        errorContainer.textContent = "non è stata scelta nessuna proposta";
     }
-})
+});
