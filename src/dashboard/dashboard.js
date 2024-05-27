@@ -7,7 +7,6 @@ window.addEventListener("load", (event) => {
 });
 
 async function getArticles() {
-    console.log("taiti coglone");
     const response = await fetch("getDashboardArticles.php", {
         method: "POST",
     });
@@ -28,12 +27,12 @@ async function getArticles() {
     data.data.forEach((article) => {
         const articleElement = createArticle(article);
         articles.appendChild(articleElement);
-        articles.appendChild(document.createElement("hr"));
     });
 }
 
 function createArticle(article) {
     const articleElement = document.createElement("div");
+    articleElement.id = article.article_id;
     articleElement.classList.add("article");
     const name = document.createElement("h3");
     name.classList.add("name");
@@ -43,19 +42,41 @@ function createArticle(article) {
     description.textContent = article.description;
     const type = document.createElement("p");
     type.classList.add("type");
-    type.textContent = article.type;
-    const created_at = document.createElement("p");
-    created_at.classList.add("created_at");
+    type.textContent = "categoria: " + article.type;
+    const user = document.createElement("p");
+    user.classList.add("user");
+    user.textContent = article.username;
     const link = document.createElement("a");
-    link.textContent = "vai al articolo";
     link.href = "../article/article.php?article_id=" + article.article_id;
-    created_at.textContent = article.created_at;
-    articleElement.appendChild(name);
-    articleElement.appendChild(description);
-    articleElement.appendChild(type);
-    articleElement.appendChild(created_at);
-    articleElement.appendChild(link);
+    link.innerHTML = "vai all'articolo &rarr;";
+    link.classList.add("link");
+    const images = createImages(article.images);
+    // appending
+    const contentContainer = document.createElement("div");
+    contentContainer.classList.add("content");
+    contentContainer.appendChild(name);
+    contentContainer.appendChild(description);
+    contentContainer.appendChild(type);
+    contentContainer.appendChild(user);
+    contentContainer.appendChild(link);
+    articleElement.appendChild(images);
+    articleElement.appendChild(contentContainer);
     return articleElement;
+}
+
+function createImages(images) {
+    const pathToRoot = "../../";
+    const imagesContainer = document.createElement("div");
+    imagesContainer.classList.add("images-container");
+    images.forEach((image) => {
+        const imageElement = document.createElement("img");
+        imageElement.classList.add("image");
+        imageElement.src = pathToRoot + image;
+        imageElement.alt = image.alt || "immagine non disponibile";
+        imageElement.loading = "lazy";
+        imagesContainer.appendChild(imageElement);
+    });
+    return imagesContainer;
 }
 
 async function getProposals() {
@@ -79,7 +100,6 @@ async function getProposals() {
     data.data.forEach((proposal) => {
         const proposalElement = createProposal(proposal);
         proposals.appendChild(proposalElement);
-        proposals.appendChild(document.createElement("hr"));
     });
 }
 

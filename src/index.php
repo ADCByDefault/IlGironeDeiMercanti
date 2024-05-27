@@ -33,7 +33,6 @@ if (!isset($_SESSION["user_id"])) {
         <div class="error-container" id="errorContainer">Loading...</div>
         <div class="articles-container" id="articlesContainer"></div>
     </main>
-
 </body>
 
 </html>

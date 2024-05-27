@@ -19,6 +19,7 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
     <title>Home</title>
     <script src="dashboard.js" defer></script>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 
 <body>
@@ -37,17 +38,15 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
         <a href="../index.php">Home</a>
     </p>
     <div id="errorContainer"></div>
-    <section id="articles">
-        <h2>i tuoi articoli sul mercato</h2>
-    </section>
-    <section id="proposals">
-        <h2>le proposte che hai inviato</h2>
-    </section>
     <div>
-        <a href="../authentication/loginPage.php">go to login</a>
+        <h2>i tuoi articoli sul mercato</h2>
+        <section id="articles" class="articles-container">
+        </section>
     </div>
     <div>
-        <a href="../authentication/signupPage.php">go to signup</a>
+        <h2>le proposte che hai inviato</h2>
+        <section id="proposals" class="proposal-container">
+        </section>
     </div>
 </body>
 

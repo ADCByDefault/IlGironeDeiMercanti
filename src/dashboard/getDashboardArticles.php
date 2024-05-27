@@ -1,6 +1,7 @@
 <?php
 include_once "../authentication/connessione.php";
 include_once "../class/Response.php";
+include_once "../utils/articleMethods.php";
 
 
 if (!$_SESSION["user_id"]) {
@@ -20,18 +21,16 @@ while ($row = $result->fetch_assoc()) {
 }
 
 $sql = "SELECT * FROM articles WHERE user_id = $user_id";
-$result = $conn->query($sql);
+$res = $conn->query($sql);
 $data = [];
+if ($res->num_rows > 0) {
+    $data = [];
+    while ($row = $res->fetch_assoc()) {
+        $data[] = getArticle($conn, $row["article_id"]);
+    }
+    $res = new Response("251", $data); // articles found
+} else {
+    $res = new Response("551"); // Internal error
 
-while ($row = $result->fetch_assoc()) {
-    $l = count($data);
-    $data[$l]["article_id"] = $row["article_id"];
-    $data[$l]["name"] = $row["name"];
-    $data[$l]["description"] = $row["description"];
-    $data[$l]["created_at"] = $row["created_at"];
-    $type_id = $row["type_id"];
-    $data[$l]["type"] = $types[$type_id];
 }
-
-$res = new Response("251", $data); // articles found
 echo $res->json();

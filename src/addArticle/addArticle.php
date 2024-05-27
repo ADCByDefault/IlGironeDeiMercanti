@@ -33,7 +33,7 @@ if (!isset($_SESSION["user_id"])) {
                 <br><br>
                 <input type="text" name="nome" placeholder="articolo">
                 <input type="text" name="descrizione" placeholder="breve descrizione">
-                <select name="type" id="">
+                <select name="type_id" id="">
                     <?php
                     $sql = "SELECT type_id, name FROM types";
                     $result = $conn->query($sql);

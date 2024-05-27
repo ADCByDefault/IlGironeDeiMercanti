@@ -70,7 +70,7 @@ session_start();
         let message;
         if (data.status == "252") {
             message = "Hai fatto il login, verrai reindirizzato alla tua pagina di profilo fra poco";
-            window.location.assign("../dashboard/dashboard.php");
+            window.location.assign("../index.php");
         } else if (data.status == "453") {
             message = "password sbagliata";
         } else if (data.status == "451") {

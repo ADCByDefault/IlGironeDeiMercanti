@@ -1,8 +1,3 @@
-body {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-}
 .articles-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, 12rem);
