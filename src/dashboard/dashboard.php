@@ -13,6 +13,7 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
 <html lang="en">
 
 <head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,7 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
 
 <body>
     <header>
-        <h1>
+        <h1 class="text-center">
             Il Girone Dei Mercanti
         </h1>
     </header>
@@ -32,22 +33,34 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
     if (isset($_SESSION["error"])) {
         echo "<p>" . $_SESSION["error"] . "</p>";
     }
-    echo "<h2>" . " Benvenuto " . $username . "</h2>";
+    
+    echo "<h2 class=\"text-center\">" . " Benvenuto " . $username . "</h2>";
     ?>
-    <p>
-        <a href="../index.php">Home</a>
+    <p class="text-center">
+        <a  href="../index.php">Home</a>
     </p>
     <div id="errorContainer"></div>
     <div>
-        <h2>i tuoi articoli sul mercato</h2>
+        <h2 class="text-center">i tuoi articoli sul mercato</h2>
         <section id="articles" class="articles-container">
         </section>
     </div>
-    <div>
+    <div class="text-center " >
         <h2>le proposte che hai inviato</h2>
         <section id="proposals" class="proposal-container">
         </section>
     </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

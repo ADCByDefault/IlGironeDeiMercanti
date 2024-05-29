@@ -7,9 +7,8 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"></html>
 
 <head>
     <meta charset="UTF-8">
@@ -24,9 +23,10 @@ if (!isset($_SESSION["user_id"])) {
 <body class="position-relative">
     </nav>
     <Header>
-        <h1>Benvenuto nel Girone dei Mercanti</h1>
+        <h1>Benvenuto nel Girone dei Mercanti </h1>
         <p><a class="link" href="authentication/logout.php">logout &#9758;</a></p>
         <p><a class="link" href="dashboard/dashboard.php">dashboard &#9978;</a></p>
+        <p><a class="link" href="comunications/comunication.php">comunicazioni &#9989;</a></p>
         <p><a class="link" href="addArticle/addArticle.php">aggiungi articolo &#9741;</a></p>
     </Header>
     <main>
