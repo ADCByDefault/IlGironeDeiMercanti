@@ -49,14 +49,21 @@ body {
 }
 
 header {
-    background-color: var(--primary-color);
-    color: var(--text-color-lighter);
     padding: 1rem;
     text-align: center;
+    filter: drop-shadow(0 0 0.75rem crimson);
 }
 
 main {
     padding: 1rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color-lighter);
 }
 
 .link {

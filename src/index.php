@@ -14,7 +14,7 @@ if (!isset($_SESSION["user_id"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <script src="index.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="index.css">
@@ -24,10 +24,12 @@ if (!isset($_SESSION["user_id"])) {
     </nav>
     <Header>
         <h1>Benvenuto nel Girone dei Mercanti </h1>
-        <p><a class="link" href="authentication/logout.php">logout &#9758;</a></p>
-        <p><a class="link" href="dashboard/dashboard.php">dashboard &#9978;</a></p>
-        <p><a class="link" href="comunications/comunication.php">comunicazioni &#9989;</a></p>
-        <p><a class="link" href="addArticle/addArticle.php">aggiungi articolo &#9741;</a></p>
+        <nav>
+            <p><a class="link" href="dashboard/dashboard.php">dashboard &#9978;</a></p>
+            <p><a class="link" href="comunications/comunication.php">comunicazioni &#9989;</a></p>
+            <p><a class="link" href="addArticle/addArticle.php">aggiungi articolo &#9741;</a></p>
+            <p><a class="link" href="authentication/logout.php">logout &#9758;</a></p>
+        </nav>
     </Header>
     <main>
         <div class="error-container" id="errorContainer">Loading...</div>
