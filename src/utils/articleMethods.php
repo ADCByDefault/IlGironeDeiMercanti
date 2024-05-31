@@ -7,7 +7,7 @@ function getArticle($conn, $article_id)
             WHERE article_id = $article_id";
     $res = $conn->query($sql);
     if ($res->num_rows < 0) {
-        return null;
+        return [];
     }
     while ($row = $res->fetch_assoc()) {
         $user_id = $row["user_id"];
@@ -36,28 +36,14 @@ function getArticle($conn, $article_id)
         $images[] = $row["image_url"];
     }
     $data["images"] = $images;
-    // $proposals = [];
-    // $sql = "SELECT * FROM proposals
-    //         JOIN users ON proposals.user_id = users.user_id
-    //         WHERE article_id = $article_id";
-    // $res = $conn->query($sql);
-    // while ($row = $res->fetch_assoc()) {
-    //     $proposals[] = [
-    //         "username" => $row["username"],
-    //         "proposal_id" => $row["proposal_id"],
-    //         "price" => $row["price"],
-    //         "created_at" => $row["created_at"]
-    //     ];
-    // }
-    // $data["proposals"] = $proposals;
     return $data;
 }
 
 function getArticleWithProposals($conn, $article_id)
 {
     $data = getArticle($conn, $article_id);
-    if ($data == null) {
-        return null;
+    if ($data == []) {
+        return [];
     }
     $proposals = [];
     $sql = "SELECT * FROM proposals
@@ -83,7 +69,29 @@ function getArticleUserId($conn, $article_id)
             WHERE article_id = $article_id";
     $res = $conn->query($sql);
     if ($res->num_rows < 0) {
-        return null;
+        return [];
     }
     return $res->fetch_assoc()["user_id"];
+}
+
+function getProposalsWithUserIdAndArticleId($conn, $user_id, $article_id)
+{
+    $sql = "SELECT * FROM proposals
+            JOIN users ON proposals.user_id = users.user_id
+            WHERE article_id = $article_id";
+    $res = $conn->query($sql);
+    if ($res->num_rows < 0) {
+        return [];
+    }
+    $proposals = [];
+    while ($row = $res->fetch_assoc()) {
+        $proposals[] = [
+            "username" => $row["username"],
+            "proposal_id" => $row["proposal_id"],
+            "price" => $row["price"],
+            "created_at" => $row["created_at"],
+            "status" => $row["status"]
+        ];
+    }
+    return $proposals;
 }

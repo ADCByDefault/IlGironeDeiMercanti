@@ -25,18 +25,14 @@ async function setPage(article_id) {
     const article = res.data;
     setArticle(article);
     article_idContainer.value = article.article_id;
+    setProposals(article.proposals ? article.proposals : []);
+    const forms = Array.from(
+        document.querySelectorAll("#proposalsContainer form")
+    );
+    forms.forEach((form) => {
+        form.remove();
+    });
     console.log(article);
-    if (article.request_username == null) {
-        makeProposal.style.display = "none";
-        proposalsContainer.style.display = "none";
-        return;
-    }
-    if (article.username == article.request_username) {
-        setProposals(article.proposals);
-        makeProposal.style.display = "none";
-        return;
-    }
-    proposalsContainer.style.display = "none";
 }
 
 async function getArticle(article_id) {
@@ -67,22 +63,25 @@ function setImages(images) {
 }
 
 function setProposals(proposals) {
-    if (!proposals) {
+    if (!proposals || proposals.length == 0) {
+        const p = document.createElement("p");
+        p.textContent = "non ci sono proposte";
+        proposalsContainer.appendChild(p);
         return;
     }
     proposals.forEach((proposal) => {
         const proposalElement = document.createElement("div");
         proposalElement.classList.add("proposal");
         if (proposal.status == 1) {
-            proposalElement.style.backgroundColor = "green";
+            proposalElement.classList.add("accepted");
         }
         if (proposal.status == -1) {
-            proposalElement.style.backgroundColor = "red";
+            proposalElement.classList.add("declined");
         }
         const usernameElement = document.createElement("p");
         usernameElement.textContent = proposal.username;
         const priceElement = document.createElement("p");
-        priceElement.textContent = proposal.price;
+        priceElement.textContent = "prezzo: " + proposal.price;
         const createdAtElement = document.createElement("p");
         createdAtElement.textContent = proposal.created_at;
 
@@ -151,6 +150,7 @@ function addListenerToForm(form, action) {
 
 makeProposal.addEventListener("submit", async (e) => {
     e.preventDefault();
+    e.submitter.disabled = true;
     const form = document.getElementById("proposalForm");
     const formData = new FormData(form);
     const response = await fetch("makeProposal.php", {
@@ -159,7 +159,6 @@ makeProposal.addEventListener("submit", async (e) => {
     });
     const json = await response.json();
     console.log(json);
-
     if (json.status == 251) {
         informationContainer.textContent = "proposta inviata con successo";
         return;

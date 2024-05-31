@@ -40,6 +40,8 @@ try {
         $data = getArticleWithProposals($conn, $article_id);
     } else {
         $data = getArticle($conn, $article_id);
+        $proposals = getProposalsWithUserIdAndArticleId($conn, $request_user_id, $article_id);
+        $data["proposals"] = $proposals;
     }
 } catch (Exception $e) {
     Response::send(551); // could not get article

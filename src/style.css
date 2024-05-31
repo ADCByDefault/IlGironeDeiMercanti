@@ -48,6 +48,17 @@ body {
     padding: 0;
 }
 
+header {
+    background-color: var(--primary-color);
+    color: var(--text-color-lighter);
+    padding: 1rem;
+    text-align: center;
+}
+
+main {
+    padding: 1rem;
+}
+
 .link {
     text-decoration: none;
     color: var(--text-color);
@@ -81,6 +92,12 @@ body {
     cursor: pointer;
     transition: var(--transition-slow);
 }
+.btn[disabled] {
+    background-color: var(--background-color);
+    border: 1px solid gray;
+    color: gray;
+    cursor: not-allowed;
+}
 .btn:hover {
     color: var(--text-color);
     background-color: var(--background-color);
@@ -93,6 +110,15 @@ body {
     border: 1px solid var(--text-color);
     border-radius: var(--border-radius);
     margin-bottom: 1rem;
+}
+
+.proposal {
+    display: flex;
+    flex-direction: column;
+    background: var(--text-color-lighter);
+}
+.proposal p {
+    margin: 0.2rem;
 }
 
 @keyframes link-after-out {
