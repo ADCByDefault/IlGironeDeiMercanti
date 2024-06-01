@@ -18,13 +18,8 @@ if (!isset($_SESSION["user_id"])) {
     <div class="error-container" id="errorContainer"></div>
     <div class="information-container" id="informationContainer"></div>
     <section class="content">
-        <div>
-            <p class="description" id="description">
-                descrizione dell'articolo
-            </p>
-            <p class="created_at" id="created_at">14/07/1397</p>
+        <div id="proposals">
         </div>
-        <div class="images-container" id="imagesContainer"></div>
     </section>
 </body>
 </html>

@@ -55,6 +55,7 @@ session_start();
     const errorContainer = document.getElementById("errorContainer");
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
+        event.submitter.disabled = true;
         errorContainer.textContent = "Loading...";
         const formData = new FormData(form);
         const response = await fetch("login.php", {

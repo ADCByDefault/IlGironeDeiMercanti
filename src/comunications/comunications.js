@@ -1,0 +1,10 @@
+.accettato{
+
+}
+
+.rifiutato{
+
+}
+.analisi{
+    
+}

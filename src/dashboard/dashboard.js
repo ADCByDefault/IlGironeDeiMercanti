@@ -1,9 +1,10 @@
 const errorContainer = document.getElementById("errorContainer");
 const articles = document.getElementById("articles");
 const proposals = document.getElementById("proposals");
+let cont = 1;
 window.addEventListener("load", (event) => {
     getArticles();
-    getProposals();
+    //getProposals();
 });
 
 async function getArticles() {
@@ -28,6 +29,7 @@ async function getArticles() {
         const articleElement = createArticle(article);
         articles.appendChild(articleElement);
     });
+    errorContainer.textContent = "";
 }
 
 function createArticle(article) {
@@ -37,15 +39,15 @@ function createArticle(article) {
     const name = document.createElement("h3");
     name.classList.add("name");
     name.textContent = article.name;
-    const description = document.createElement("p");
-    description.classList.add("description");
-    description.textContent = article.description;
+    // const description = document.createElement("p");
+    // description.classList.add("description");
+    // description.textContent = article.description;
     const type = document.createElement("p");
     type.classList.add("type");
-    type.textContent = "categoria: " + article.type;
-    const user = document.createElement("p");
-    user.classList.add("user");
-    user.textContent = article.username;
+    type.textContent = article.type;
+    // const user = document.createElement("p");
+    // user.classList.add("user");
+    // user.textContent = article.username;
     const link = document.createElement("a");
     link.href = "../article/article.php?article_id=" + article.article_id;
     link.innerHTML = "vai all'articolo &rarr;";
@@ -55,9 +57,9 @@ function createArticle(article) {
     const contentContainer = document.createElement("div");
     contentContainer.classList.add("content");
     contentContainer.appendChild(name);
-    contentContainer.appendChild(description);
+    // contentContainer.appendChild(description);
     contentContainer.appendChild(type);
-    contentContainer.appendChild(user);
+    // contentContainer.appendChild(user);
     contentContainer.appendChild(link);
     articleElement.appendChild(images);
     articleElement.appendChild(contentContainer);
@@ -65,18 +67,32 @@ function createArticle(article) {
 }
 
 function createImages(images) {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("slider-wrapper");
+    const slider = document.createElement("div");
+    slider.classList.add("slider");
+    const dots = document.createElement("div");
+    dots.classList.add("dots");
+    wrapper.append(slider, dots);
     const pathToRoot = "../../";
-    const imagesContainer = document.createElement("div");
-    imagesContainer.classList.add("images-container");
     images.forEach((image) => {
-        const imageElement = document.createElement("img");
-        imageElement.classList.add("image");
-        imageElement.src = pathToRoot + image;
-        imageElement.alt = image.alt || "immagine non disponibile";
-        imageElement.loading = "lazy";
-        imagesContainer.appendChild(imageElement);
+        const div = document.createElement("div");
+        div.classList.add("slide");
+        div.id = "image" + cont;
+        div.style.backgroundImage = `url(${pathToRoot}${image})`;
+        slider.appendChild(div);
+        const dot = document.createElement("a");
+        dot.href = "#image" + cont;
+        dots.appendChild(dot);
+        cont++;
     });
-    return imagesContainer;
+    if (images.length == 0) {
+        const div = document.createElement("div");
+        div.classList.add("slide");
+        div.classList.add("default-image");
+        slider.appendChild(div);
+    }
+    return wrapper;
 }
 
 async function getProposals() {

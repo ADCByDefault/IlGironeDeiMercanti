@@ -13,7 +13,6 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
 <html lang="en">
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,28 +39,19 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
             </p>
         </nav>
     </header>
-    <div id="errorContainer"></div>
-    <div>
-        <h2>i tuoi articoli sul mercato</h2>
-        <section id="articles" class="articles-container">
-        </section>
-    </div>
-    <div>
-        <h2>le proposte che hai inviato</h2>
-        <section id="proposals" class="proposal-container">
-        </section>
-    </div>
-
-
-
-
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <main>
+        <div id="errorContainer" class="error-container">Loading...</div>
+        <div class="container">
+            <h2>i tuoi articoli sul mercato</h2>
+            <section id="articles" class="articles-container">
+            </section>
+        </div>
+        <div>
+            <h2>le proposte che hai inviato</h2>
+            <section id="proposals" class="proposal-container">
+            </section>
+        </div>
+    </main>
 </body>
 
 </html>

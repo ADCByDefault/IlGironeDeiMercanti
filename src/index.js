@@ -1,12 +1,23 @@
 const articlesContainer = document.getElementById("articlesContainer");
+const typeSelect = document.getElementById("typeSelect");
 const errorContainer = document.getElementById("errorContainer");
+let cont = 1;
 window.addEventListener("load", () => {
     getAllArticles();
 });
-
+typeSelect.addEventListener("change", () => {
+    const type_id = typeSelect.value;
+    window.location.replace("index.php?type_id=" + type_id);
+});
 async function getAllArticles() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let type_id = urlParams.get("type_id");
+    if (type_id == null) {
+        type_id = 0;
+    }
+    typeSelect.value = type_id;
     try {
-        const response = await fetch("getAllArticles.php", {
+        const response = await fetch(`getAllArticles.php?type_id=${type_id}`, {
             method: "GET",
         });
         const data = await response.json();
@@ -38,15 +49,15 @@ function createArticle(article) {
     const name = document.createElement("h3");
     name.classList.add("name");
     name.textContent = article.name;
-    const description = document.createElement("p");
-    description.classList.add("description");
-    description.textContent = article.description;
+    // const description = document.createElement("p");
+    // description.classList.add("description");
+    // description.textContent = article.description;
     const type = document.createElement("p");
     type.classList.add("type");
-    type.textContent = "categoria: " + article.type;
-    const user = document.createElement("p");
-    user.classList.add("user");
-    user.textContent = article.username;
+    type.textContent = article.type;
+    // const user = document.createElement("p");
+    // user.classList.add("user");
+    // user.textContent = article.username;
     const link = document.createElement("a");
     link.href = "article/article.php?article_id=" + article.article_id;
     link.innerHTML = "vai all'articolo &rarr;";
@@ -56,9 +67,9 @@ function createArticle(article) {
     const contentContainer = document.createElement("div");
     contentContainer.classList.add("content");
     contentContainer.appendChild(name);
-    contentContainer.appendChild(description);
+    // contentContainer.appendChild(description);
     contentContainer.appendChild(type);
-    contentContainer.appendChild(user);
+    // contentContainer.appendChild(user);
     contentContainer.appendChild(link);
     articleElement.appendChild(images);
     articleElement.appendChild(contentContainer);
@@ -66,16 +77,30 @@ function createArticle(article) {
 }
 
 function createImages(images) {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("slider-wrapper");
+    const slider = document.createElement("div");
+    slider.classList.add("slider");
+    const dots = document.createElement("div");
+    dots.classList.add("dots");
+    wrapper.append(slider, dots);
     const pathToRoot = "../";
-    const imagesContainer = document.createElement("div");
-    imagesContainer.classList.add("images-container");
     images.forEach((image) => {
-        const imageElement = document.createElement("img");
-        imageElement.classList.add("image");
-        imageElement.src = pathToRoot + image;
-        imageElement.alt = image.alt || "immagine non disponibile";
-        imageElement.loading = "lazy";
-        imagesContainer.appendChild(imageElement);
+        const div = document.createElement("div");
+        div.classList.add("slide");
+        div.id = "image" + cont;
+        div.style.backgroundImage = `url(${pathToRoot}${image})`;
+        slider.appendChild(div);
+        const dot = document.createElement("a");
+        dot.href = "#image" + cont;
+        dots.appendChild(dot);
+        cont++;
     });
-    return imagesContainer;
+    if (images.length == 0) {
+        const div = document.createElement("div");
+        div.classList.add("slide");
+        div.classList.add("default-image");
+        slider.appendChild(div);
+    }
+    return wrapper;
 }

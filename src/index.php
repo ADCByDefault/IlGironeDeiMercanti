@@ -8,7 +8,9 @@ if (!isset($_SESSION["user_id"])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en"></html>
+<html lang="en">
+
+</html>
 
 <head>
     <meta charset="UTF-8">
@@ -28,6 +30,17 @@ if (!isset($_SESSION["user_id"])) {
             <p><a class="link" href="dashboard/dashboard.php">dashboard &#9978;</a></p>
             <p><a class="link" href="comunications/comunication.php">comunicazioni &#9989;</a></p>
             <p><a class="link" href="addArticle/addArticle.php">aggiungi articolo &#9741;</a></p>
+            <select class="select-type" name="type_id" id="typeSelect">
+                <option value=0>tutto</option>
+                <?php
+                $sql = "SELECT type_id, name FROM types";
+                $result = $conn->query($sql);
+                while ($row = $result->fetch_assoc()) {
+                    echo $row["name"];
+                    echo "<option value=\"{$row["type_id"]}\">{$row["name"]}</option>";
+                }
+                ?>
+            </select>
             <p><a class="link" href="authentication/logout.php">logout &#9758;</a></p>
         </nav>
     </Header>

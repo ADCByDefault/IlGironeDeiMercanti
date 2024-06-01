@@ -8,7 +8,8 @@ const articleImagesContainer = document.getElementById("imagesContainer");
 const makeProposal = document.getElementById("makeProposal");
 const proposalsContainer = document.getElementById("proposalsContainer");
 const article_idContainer = document.getElementById("article_id");
-
+const dots = document.getElementById("dots");
+let cont = 1;
 window.addEventListener("load", () => {
     const article_id = new URLSearchParams(window.location.search).get(
         "article_id"
@@ -26,12 +27,17 @@ async function setPage(article_id) {
     setArticle(article);
     article_idContainer.value = article.article_id;
     setProposals(article.proposals ? article.proposals : []);
-    const forms = Array.from(
-        document.querySelectorAll("#proposalsContainer form")
-    );
-    forms.forEach((form) => {
-        form.remove();
-    });
+    if (article.username == article.request_username) {
+        makeProposal.style.display = "none";
+    } else {
+        const forms = Array.from(
+            document.querySelectorAll("#proposalsContainer form")
+        );
+        forms.forEach((form) => {
+            form.remove();
+        });
+    }
+    informationContainer.textContent = "";
     console.log(article);
 }
 
@@ -53,12 +59,15 @@ async function setArticle(article) {
 function setImages(images) {
     const pathToRoot = "../../";
     images.forEach((image) => {
-        const imageElement = document.createElement("img");
-        imageElement.classList.add("image");
-        imageElement.src = pathToRoot + image;
-        imageElement.alt = image.alt || "immagine non disponibile";
-        imageElement.loading = "lazy";
-        articleImagesContainer.appendChild(imageElement);
+        const div = document.createElement("div");
+        div.classList.add("slide");
+        div.id = "image" + cont;
+        div.style.backgroundImage = `url(${pathToRoot}${image})`;
+        articleImagesContainer.appendChild(div);
+        const dot = document.createElement("a");
+        dot.href = "#image" + cont;
+        dots.appendChild(dot);
+        cont++;
     });
 }
 
@@ -81,7 +90,7 @@ function setProposals(proposals) {
         const usernameElement = document.createElement("p");
         usernameElement.textContent = proposal.username;
         const priceElement = document.createElement("p");
-        priceElement.textContent = "prezzo: " + proposal.price;
+        priceElement.textContent = "prezzo: " + proposal.price + " fiorini";
         const createdAtElement = document.createElement("p");
         createdAtElement.textContent = proposal.created_at;
 
@@ -115,9 +124,11 @@ function makeAcceptOrDeclineForms(proposal_id, action, status) {
     hiddenInput.value = proposal_id;
     form.appendChild(hiddenInput);
     const button = document.createElement("button");
+    button.classList.add("btn", "secondary");
     button.textContent = "rifiuta";
     if (action == "acceptProposal.php") {
         button.textContent = "accetta";
+        button.classList.remove("secondary");
     }
     if (status != 0) {
         button.disabled = true;
@@ -129,6 +140,7 @@ function makeAcceptOrDeclineForms(proposal_id, action, status) {
 function addListenerToForm(form, action) {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
+        informationContainer.textContent = "Loading...";
         while (proposalsContainer.firstChild) {
             proposalsContainer.removeChild(proposalsContainer.firstChild);
         }
@@ -142,7 +154,7 @@ function addListenerToForm(form, action) {
             method: form.method,
             body: formData,
         });
-        const json = await response.text();
+        const json = await response.json();
         console.log(json);
         location.reload();
     });
@@ -151,6 +163,8 @@ function addListenerToForm(form, action) {
 makeProposal.addEventListener("submit", async (e) => {
     e.preventDefault();
     e.submitter.disabled = true;
+    errorContainer.textContent = "";
+    informationContainer.textContent = "Loading...";
     const form = document.getElementById("proposalForm");
     const formData = new FormData(form);
     const response = await fetch("makeProposal.php", {
@@ -159,18 +173,23 @@ makeProposal.addEventListener("submit", async (e) => {
     });
     const json = await response.json();
     console.log(json);
+    errorContainer.textContent = "";
+    informationContainer.textContent = "";
     if (json.status == 251) {
         informationContainer.textContent = "proposta inviata con successo";
-        return;
     } else if (json.status == 252) {
-        informationContainer.textContent = "proposta accettata";
-        return;
+        informationContainer.textContent = "proposta aggiornata con successo";
     } else if (json.status == 451) {
         errorContainer.textContent = "non è stato inserito un prezzo";
-        return;
     } else if (json.status == 452) {
         errorContainer.textContent = "non è stata scelta nessuna proposta";
     } else if (json.status == 454) {
         errorContainer.textContent = "una proposta è già stata accettata";
     }
+    await sleep(2000);
+    window.location.reload();
 });
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}

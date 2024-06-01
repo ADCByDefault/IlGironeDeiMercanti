@@ -1,28 +1,30 @@
-.images-container {
+img {
     width: 100%;
-    min-height: 20rem;
-    display: flex;
-    overflow-x: auto;
-    gap: 1rem;
-    background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -10px 0/
-            20px 20px,
-        linear-gradient(225deg, #444cf7 25%, transparent 25%) -10px 0/ 20px 20px,
-        linear-gradient(315deg, #444cf755 25%, transparent 25%) 0px 0/ 20px 20px,
-        linear-gradient(45deg, #444cf7 25%, #e5e5f7 25%) 0px 0/ 20px 20px;
-}
-
-.images-container,
-image {
-    width: 90%;
-    height: auto;
+    object-fit: contain;
 }
 
 .error_container {
-    color: red;
+    background-color: var(--text-color-light);
 }
 
 .information-container {
-    color: green;
+    background-color: var(--primary-color);
+}
+
+.information-container:empty,
+.error_container:empty {
+    display: none;
+}
+.information-container,
+.error_container {
+    display: grid;
+    place-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
 }
 
 .proposal-form {
@@ -52,4 +54,11 @@ image {
     to {
         position: initial;
     }
+}
+
+.proposals-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex-flow: column;
 }

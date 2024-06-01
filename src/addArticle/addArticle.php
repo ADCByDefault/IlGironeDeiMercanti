@@ -35,12 +35,12 @@ if (!isset($_SESSION["user_id"])) {
                 <input type="text" name="descrizione" placeholder="breve descrizione">
                 <select name="type_id" id="">
                     <?php
-                    $sql = "SELECT type_id, name FROM types";
-                    $result = $conn->query($sql);
-                    while ($row = $result->fetch_assoc()) {
-                        echo $row["name"];
-                        echo "<option value=\"{$row["type_id"]}\">{$row["name"]}</option>";
-                    }
+                        $sql = "SELECT type_id, name FROM types";
+                        $result = $conn->query($sql);
+                        while ($row = $result->fetch_assoc()) {
+                            echo $row["name"];
+                            echo "<option value=\"{$row["type_id"]}\">{$row["name"]}</option>";
+                        }
                     ?>
                 </select>
                 <button type="submit">invia</button>
