@@ -1,6 +1,7 @@
 <?php
 include_once "../authentication/connessione.php";
 include_once "../class/Response.php";
+include_once "../utils/articleMethods.php";
 
 
 if (!isset($_SESSION["user_id"])) {
@@ -18,11 +19,13 @@ $data = [];
 while ($row = $result->fetch_assoc()) {
     $l = count($data);
     $data[$l]["article_id"] = $row["article_id"];
+    $article_id = $row["article_id"];
     $data[$l]["proposal_id"] = $row["proposal_id"];
     $data[$l]["user_id"] = $row["user_id"];
     $data[$l]["created_at"] = $row["created_at"];
     $data[$l]["price"] = $row["price"];
     $data[$l]["status"] = $row["status"];
+    $data[$l]["article"] = getArticle($conn, $article_id);
 }
 
 $res = new Response("251", $data); // articles found

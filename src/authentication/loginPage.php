@@ -30,15 +30,11 @@ session_start();
         <form class="login-form" action="login.php" method="post" id="loginForm">
             <div>
                 <label class="label" for="username">Username</label>
-                <br>
                 <input class="input" type="text" name="username" id="username" placeholder="username" required />
-                <br>
             </div>
             <div>
                 <label class="label" for="password">Password</label>
-                <br>
                 <input class="input" type="password" name="password" id="password" placeholder="password" required />
-                <br>
             </div>
             <div>
                 <button class="btn">Invia</button>
@@ -46,7 +42,6 @@ session_start();
         </form>
         <div>
             <a href="signupPage.php" class="link">Registrati &rarr;</a>
-        </div>
         </div>
     </main>
 </body>

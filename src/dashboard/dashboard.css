@@ -13,23 +13,8 @@ nav p {
     gap: 1.7rem;
     row-gap: 3rem;
 }
-
-.article {
-    box-shadow: var(--shadow);
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.article .image {
-    width: 90%;
-    object-fit: cover;
-}
-
-.article .content {
-    padding: 1rem;
-}
-.article .type {
-    color: var(--text-color-gray);
+.articles-container:empty{
+    display: none;
 }
 
 .slider {
@@ -38,4 +23,10 @@ nav p {
 }
 .error-container {
     text-align: center;
+}
+
+.error{
+    font-size: 2rem;
+    color: var(--text-color-light);
+    font-weight: 600;
 }

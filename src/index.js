@@ -12,8 +12,8 @@ typeSelect.addEventListener("change", () => {
 async function getAllArticles() {
     const urlParams = new URLSearchParams(window.location.search);
     let type_id = urlParams.get("type_id");
-    if (type_id == null) {
-        type_id = 0;
+    if (!["0", "1", "2", "3", "4", "5", "6"].includes(type_id)) {
+        type_id = "0";
     }
     typeSelect.value = type_id;
     try {
@@ -32,7 +32,7 @@ async function getAllArticles() {
             return;
         }
         if (data.status == "551") {
-            errorContainer.textContent = "errore interno al server";
+            errorContainer.textContent = "Nessun Articolo Trovato";
             return;
         }
         throw new Error("errore sconosciuto");

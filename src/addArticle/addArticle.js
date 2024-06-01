@@ -5,6 +5,7 @@ const img = document.getElementById("img");
 
 addArticle.addEventListener("submit", async (e) => {
     e.preventDefault();
+    e.submitter.disabled = true;
     const form = document.getElementById("articleForm");
     const formData = new FormData(form);
     formData.append("img", img.files[0]);
@@ -22,14 +23,11 @@ addArticle.addEventListener("submit", async (e) => {
             "../article/article.php?article_id=" + article_id
         );
     } else if (json.status == 451) {
-        errorContainer.textContent = "riempi tutti i campi";
-        return;
+        errorContainer.textContent = "Campi obbligatori non compilati";
     } else if (json.status == 452) {
-        errorContainer.textContent = "errore nell'inserimento dell'immagine";
-        return;
+        errorContainer.textContent = "Errore nell'inserimento dell'immagine";
     } else if (json.status == 453) {
-        errorContainer.textContent = "l'estenzione del file non e' supportata";
-        console.log("ciao");
-        return;
+        errorContainer.textContent = "L'estenzione del file non e' supportata";
     }
+    e.submitter.disabled = false;
 });

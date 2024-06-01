@@ -36,7 +36,7 @@ if ($res->num_rows > 0) {
     }
     $response = new Response("251", $rows);
 } else {
-    $response = new Response("551"); // Internal error
+    $response = new Response("551"); // No articles found
 }
 
 if (!$response) {

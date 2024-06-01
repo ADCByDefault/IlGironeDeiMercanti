@@ -19,31 +19,45 @@ if (!isset($_SESSION["user_id"])) {
 </head>
 
 <body>
-    <div>
-        <a href="../index.php">home</a>
-    </div>
-    <div class="error-container" id="errorContainer"></div>
-    <div class="information-container" id="informationContainer"></div>
+    <header>
+        <h1>Aggiungi il tuo articolo</h1>
+        <div>
+            <a href="../index.php" class="link">🏠 Home</a>
+        </div>
+    </header>
     <main>
+        <p class="error-container" id="errorContainer"></p>
+        <p class="information-container" id="informationContainer"></p>
         <section class="addArticle" id="addArticle">
-            <h2>aggiungi il tuo articolo</h2>
             <form action="makeArticle.php" method="post" id="articleForm" enctype="multipart/form-data">
-                <input type="file" name="img" id="img">
-                <p>estensioni consentite -> .jpg .jpeg .png .gif . webp</p>
-                <br><br>
-                <input type="text" name="nome" placeholder="articolo">
-                <input type="text" name="descrizione" placeholder="breve descrizione">
-                <select name="type_id" id="">
-                    <?php
-                        $sql = "SELECT type_id, name FROM types";
+                <div>
+                    <label class="label" for="img">📸 Immagine</label>
+                    <input class="input" type="file" name="img" id="img">
+                    <!-- <p>Estensioni Consentite -> .jpg .jpeg .png .gif .webp</p> -->
+                </div>
+                <div>
+                    <label class="label" for="name">Nome</label>
+                    <input class="input" type="text" name="nome" id="name" placeholder="Elitropia">
+                </div>
+                <div>
+                    <label class="label" for="price">Breve Descrizione</label>
+                    <input class="input" type="text" name="descrizione" placeholder="Preziosa pietra trovata lungo il Mugnone">
+                </div>
+                <div>
+                    <label for="type">Tipologia</label>
+                    <select class="input" name="type_id" id="type">
+                        <?php
+                        $sql = "SELECT type_id, name FROM types ORDER BY name ASC";
                         $result = $conn->query($sql);
                         while ($row = $result->fetch_assoc()) {
-                            echo $row["name"];
                             echo "<option value=\"{$row["type_id"]}\">{$row["name"]}</option>";
                         }
-                    ?>
-                </select>
-                <button type="submit">invia</button>
+                        ?>
+                    </select>
+                </div>
+                <div>
+                    <button class="btn" type="submit">invia</button>
+                </div>
             </form>
         </section>
         <section class="proposals-container" id="proposalsContainer">

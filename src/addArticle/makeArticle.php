@@ -23,16 +23,25 @@ if (isset($_FILES["img"])) {
     echo $res->json();
     return;
 }
-
-if (!($_POST["nome"] != "" && isset($_POST["type_id"]))) {
+if(!isset($_POST["nome"]) || !isset($_POST["type_id"]) || !isset($_POST["descrizione"])){
     $res = new Response("451");
-    echo $res -> json();
+    echo $res->json();
     return;
 }
 
 $type_id = $_POST["type_id"];
+$type_id = $conn->real_escape_string($type_id);
 $name = $_POST["nome"];
+$name = $conn->real_escape_string($name);
 $description = $_POST["descrizione"];
+$description = $conn->real_escape_string($description);
+$sql ="SELECT * FROM types WHERE type_id = $type_id";
+$result = $conn->query($sql);
+if($result->num_rows <= 0 || $name == "" || $description == ""){
+    $res = new Response("451");
+    echo $res->json();
+    return;
+}
 $sql = "INSERT INTO articles (user_id, type_id, name, description) VALUE ($user_id, $type_id, '$name', '$description')";
 $conn->query($sql);
 $article_id = $conn->insert_id;

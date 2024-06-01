@@ -9,6 +9,7 @@ body {
 }
 .error-container {
     text-align: center;
+    color: var(--text-color-light);
 }
 .articles-container {
     display: grid;
@@ -29,10 +30,6 @@ body {
     width: 90%;
     object-fit: cover;
 }
-
-.article .content {
-    padding: 1rem;
-}
 .article .type {
     color: var(--text-color-gray);
 }
@@ -40,4 +37,10 @@ body {
 .slider {
     --slide-width: clamp(12rem, 75vw, 12rem);
     --slide-height: clamp(12rem, 75vh, 12rem);
+}
+
+.select {
+    width: fit-content;
+    padding: .2rem;
+    margin: 0rem;
 }

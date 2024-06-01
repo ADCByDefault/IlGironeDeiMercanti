@@ -1,0 +1,5 @@
+ErrorDocument 404 /IlGironeDeiMercanti/src/error/error400.php
+ErrorDocument 403 /IlGironeDeiMercanti/src/error/error400.php
+ErrorDocument 402 /IlGironeDeiMercanti/src/error/error400.php
+ErrorDocument 401 /IlGironeDeiMercanti/src/error/error400.php
+ErrorDocument 400 /IlGironeDeiMercanti/src/error/error400.php

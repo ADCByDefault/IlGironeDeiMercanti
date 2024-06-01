@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 27, 2024 alle 01:04
+-- Creato il: Giu 02, 2024 alle 01:52
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -63,7 +63,8 @@ INSERT INTO `articles` (`article_id`, `user_id`, `type_id`, `name`, `description
 (60, 8, 4, 'spike', 'brawler', '2024-05-26 20:17:59'),
 (61, 5, 3, 'ertyu', '', '2024-05-26 21:42:45'),
 (62, 5, 3, '', '', '2024-05-26 21:43:09'),
-(63, 5, 3, '', '', '2024-05-26 21:44:13');
+(63, 5, 3, '', '', '2024-05-26 21:44:13'),
+(64, 8, 3, 'prova', '', '2024-06-01 17:42:58');
 
 -- --------------------------------------------------------
 
@@ -111,7 +112,8 @@ INSERT INTO `images` (`image_id`, `article_id`, `image_url`) VALUES
 (55, 60, 'upload/download.jpg'),
 (56, 61, 'upload/IMG-20240526-WA0000.jpg'),
 (57, 62, 'upload/IMG-20240526-WA0000.jpg'),
-(58, 63, 'upload/IMG-20240526-WA0000.jpg');
+(58, 63, 'upload/IMG-20240526-WA0000.jpg'),
+(59, 64, 'upload/64.png');
 
 -- --------------------------------------------------------
 
@@ -137,7 +139,9 @@ INSERT INTO `proposals` (`proposal_id`, `user_id`, `article_id`, `price`, `statu
 (2, 8, 3, '12', -1, '2024-05-22 21:21:34'),
 (3, 8, 46, 'un complotto pls', 0, '2024-05-25 14:02:51'),
 (4, 10, 3, '1234567890', 1, '2024-05-25 22:59:11'),
-(9, 10, 1, '10,00', 0, '2024-05-26 22:08:09');
+(9, 10, 1, '10,00', 0, '2024-05-26 22:08:09'),
+(10, 8, 2, '-2', -1, '2024-05-31 19:18:38'),
+(11, 8, 44, '15', 0, '2024-05-31 22:18:17');
 
 -- --------------------------------------------------------
 
@@ -155,12 +159,12 @@ CREATE TABLE `types` (
 --
 
 INSERT INTO `types` (`type_id`, `name`) VALUES
-(3, 'abbigliamento'),
-(6, 'altro'),
-(2, 'cucina'),
-(1, 'informatica'),
-(5, 'libri'),
-(4, 'sport');
+(3, '👖 Abbigliamento'),
+(6, '🛸 Altro'),
+(2, '🍴 Cucina'),
+(1, '💻 Informatica'),
+(5, '📖 Libri'),
+(4, '🎿 Sport');
 
 -- --------------------------------------------------------
 
@@ -194,7 +198,8 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `image_id`, `email`, `fi
 (10, 'aaa', 'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', NULL, 'a@a.a', 'a', 'aa', '2024-05-25 00:23:25'),
 (11, 'sonoMarioSturniolo', '1c73aa76f104abc93fe18756dc3557c512e093ac8df969d76bd2af4726cbff6d', NULL, 'sono@mario.sturniolo', 'Mario', 'Sturniolo', '2024-05-26 03:29:57'),
 (12, 'ciompo', 'ddaed44711777b445df5b14892f0377103156457e615217a39ac9263ec75e01d', NULL, 'ciompo@gmail.com', 'ciompo', 'ciompo', '2024-05-26 22:16:46'),
-(13, 'q', '8e35c2cd3bf6641bdb0e2050b76932cbb2e6034a0ddacc1d9bea82a6ba57f7cf', NULL, 'q@q.q', 'q', 'q', '2024-05-27 00:00:43');
+(13, 'q', '8e35c2cd3bf6641bdb0e2050b76932cbb2e6034a0ddacc1d9bea82a6ba57f7cf', NULL, 'q@q.q', 'q', 'q', '2024-05-27 00:00:43'),
+(14, 'fd', '32c220482c68413fbf8290e3b1e49b0a85901cfcd62ab0738760568a2a6e8a57', NULL, '', 'df', 'fd', '2024-06-02 01:46:03');
 
 --
 -- Indici per le tabelle scaricate
@@ -247,19 +252,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT per la tabella `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT per la tabella `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT per la tabella `proposals`
 --
 ALTER TABLE `proposals`
-  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT per la tabella `types`
@@ -271,7 +276,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Limiti per le tabelle scaricate

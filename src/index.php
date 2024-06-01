@@ -27,13 +27,13 @@ if (!isset($_SESSION["user_id"])) {
     <Header>
         <h1>Benvenuto nel Girone dei Mercanti </h1>
         <nav>
-            <p><a class="link" href="dashboard/dashboard.php">dashboard &#9978;</a></p>
-            <p><a class="link" href="comunications/comunication.php">comunicazioni &#9989;</a></p>
-            <p><a class="link" href="addArticle/addArticle.php">aggiungi articolo &#9741;</a></p>
-            <select class="select-type" name="type_id" id="typeSelect">
-                <option value=0>tutto</option>
+            <p><a class="link" href="dashboard/dashboard.php">📌 dashboard</a></p>
+            <p><a class="link" href="comunications/comunication.php">✅ comunicazioni</a></p>
+            <p><a class="link" href="addArticle/addArticle.php">&#9741; aggiungi articolo</a></p>
+            <select class="select input" name="type_id" id="typeSelect" value="0">
+                <option value="0">🌍 Tutto</option>
                 <?php
-                $sql = "SELECT type_id, name FROM types";
+                $sql = "SELECT type_id, name FROM types ORDER BY name ASC";
                 $result = $conn->query($sql);
                 while ($row = $result->fetch_assoc()) {
                     echo $row["name"];

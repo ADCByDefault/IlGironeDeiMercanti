@@ -37,6 +37,10 @@ async function setPage(article_id) {
             form.remove();
         });
     }
+    const prop = Array.from(document.querySelectorAll(".declined form, .accepted from"));
+    prop.forEach((p) => {
+        p.remove();
+    });
     informationContainer.textContent = "";
     console.log(article);
 }
@@ -106,9 +110,12 @@ function setProposals(proposals) {
             proposal.status
         );
         addListenerToForm(declineForm, "declineProposal.php");
-        proposalElement.appendChild(usernameElement);
-        proposalElement.appendChild(priceElement);
-        proposalElement.appendChild(createdAtElement);
+        const proposalContent = document.createElement("div");
+        proposalContent.classList.add("proposal-content");
+        proposalContent.appendChild(usernameElement);
+        proposalContent.appendChild(priceElement);
+        proposalContent.appendChild(createdAtElement);
+        proposalElement.appendChild(proposalContent);
         proposalElement.appendChild(acceptForm);
         proposalElement.appendChild(declineForm);
         proposalsContainer.appendChild(proposalElement);
@@ -186,7 +193,7 @@ makeProposal.addEventListener("submit", async (e) => {
     } else if (json.status == 454) {
         errorContainer.textContent = "una proposta è già stata accettata";
     }
-    await sleep(2000);
+    await sleep(3000);
     window.location.reload();
 });
 

@@ -43,13 +43,11 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
         <div id="errorContainer" class="error-container">Loading...</div>
         <div class="container">
             <h2>i tuoi articoli sul mercato</h2>
-            <section id="articles" class="articles-container">
-            </section>
+            <section id="articles" class="articles-container"></section>
         </div>
         <div>
             <h2>le proposte che hai inviato</h2>
-            <section id="proposals" class="proposal-container">
-            </section>
+            <section id="proposals" class="proposals-container"></section>
         </div>
     </main>
 </body>

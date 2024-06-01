@@ -17,10 +17,33 @@ image {
     height: auto;
 }
 
-.error_conteiner{
-    color: red;
+.error-container {
+    color: var(--text-color-light);
 }
 
-.information-container{
-    color: green;
+.information-container {
+    color: var(--primary-color);
+}
+
+.error-container:empty,
+.information-container:empty {
+    height: 0;
+    margin: 0rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    border-radius: var(--border-radius);
+    padding: 2rem 6rem;
+    box-shadow: var(--shadow);
+}
+
+.hidden {
+    display: none;
 }

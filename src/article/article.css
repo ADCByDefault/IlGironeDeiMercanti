@@ -17,6 +17,7 @@ img {
 }
 .information-container,
 .error_container {
+    font-weight: 700;
     display: grid;
     place-content: center;
     position: fixed;
@@ -27,13 +28,45 @@ img {
     z-index: 1000;
 }
 
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+.name {
+    margin-block: 0.8rem;
+}
+.description {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .proposal-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     width: 100%;
-    max-width: 30rem;
-    margin: 0 auto;
+    max-width: 12rem;
+    /* margin: 0 auto; */
+}
+.proposal .proposal-content {
+    font-weight: 700;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
 }
 
 .show-info {
@@ -56,9 +89,28 @@ img {
     }
 }
 
+.make-proposal,
+.proposals-container {
+    padding-top: 2.5rem;
+}
+
+.proposal-functions {
+    padding-block: 1rem;
+    padding-inline: 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
 .proposals-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
     flex-flow: column;
+}
+.slider {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    --slide-width: clamp(270px, calc(40px + 45vw), 800px);
+    --slide-height: clamp(200px, auto, 600px);
+    aspect-ratio: 16/9;
 }

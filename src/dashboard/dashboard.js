@@ -4,7 +4,8 @@ const proposals = document.getElementById("proposals");
 let cont = 1;
 window.addEventListener("load", (event) => {
     getArticles();
-    //getProposals();
+    getProposals();
+    errorContainer.textContent = "";
 });
 
 async function getArticles() {
@@ -21,15 +22,15 @@ async function getArticles() {
     }
     if (data.data.length == 0) {
         const error = document.createElement("p");
-        error.textContent = "non hai alcun articolo nel girone";
-        errorContainer.appendChild(error);
+        error.classList.add("error");
+        error.textContent = "Non hai alcun articolo nel girone";
+        articles.after(error);
         return;
     }
     data.data.forEach((article) => {
         const articleElement = createArticle(article);
         articles.appendChild(articleElement);
     });
-    errorContainer.textContent = "";
 }
 
 function createArticle(article) {
@@ -109,8 +110,9 @@ async function getProposals() {
     }
     if (data.data.length == 0) {
         const error = document.createElement("p");
-        error.textContent = "non hai effettuato 0 proposta";
-        errorContainer.appendChild(error);
+        error.classList.add("error");
+        error.textContent = "Non hai effettuato proposta";
+        proposals.appendChild(error);
         return;
     }
     data.data.forEach((proposal) => {
@@ -122,25 +124,44 @@ async function getProposals() {
 function createProposal(proposal) {
     const proposalElement = document.createElement("div");
     proposalElement.classList.add("proposal");
-    const proposal_id = document.createElement("h3");
-    proposal_id.classList.add("proposal_id");
-    proposal_id.textContent = "id proposta: " + proposal.proposal_id;
-    const article_id = document.createElement("p");
-    article_id.classList.add("article_id");
-    article_id.textContent = "id articolo: " + proposal.article_id;
+    const article = createArticle(proposal.article);
+    // const proposal_id = document.createElement("h3");
+    // proposal_id.classList.add("proposal_id");
+    // proposal_id.textContent = "id proposta: " + proposal.proposal_id;
+    // const article_id = document.createElement("p");
+    // article_id.classList.add("article_id");
+    // article_id.textContent = "id articolo: " + proposal.article_id;
     const price = document.createElement("p");
     price.classList.add("price");
     price.textContent = "prezzo: " + proposal.price;
     const created_at = document.createElement("p");
     created_at.classList.add("created_at");
     created_at.textContent = proposal.created_at;
-    const link = document.createElement("a");
-    link.textContent = "vai al articolo";
-    link.href = "../article/article.php?article_id=" + proposal.article_id;
-    proposalElement.appendChild(proposal_id);
-    proposalElement.appendChild(article_id);
-    proposalElement.appendChild(price);
-    proposalElement.appendChild(created_at);
-    proposalElement.appendChild(link);
+    // const link = document.createElement("a");
+    // link.textContent = "vai al articolo";
+    // link.href = "../article/article.php?article_id=" + proposal.article_id;
+    // proposalElement.appendChild(proposal_id);
+    // proposalElement.appendChild(article_id);
+    const status = document.createElement("p");
+    status.classList.add("status");
+
+    if (proposal.status == "-1") {
+        status.innerHTML = "Rifiutata &#10060;";
+        proposalElement.classList.add("declined");
+    } else if (proposal.status == "1") {
+        status.innerHTML = "accettata  &#9989;";
+        proposalElement.classList.add("accepted");
+    } else {
+        status.innerHTML = "In Attesa &#8986;";
+    }
+
+    const proposalContent = document.createElement("div");
+    proposalContent.classList.add("proposal-content");
+    proposalContent.appendChild(price);
+    proposalContent.appendChild(status);
+    proposalContent.appendChild(created_at);
+    proposalElement.appendChild(article);
+    proposalElement.appendChild(proposalContent);
+    // proposalElement.appendChild(link);
     return proposalElement;
 }
