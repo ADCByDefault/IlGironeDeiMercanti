@@ -17,6 +17,13 @@
     $result = $conn -> query($sql);
     $article_id = $result -> fetch_assoc()["article_id"];
 
+    /*
+    $sql = "SELECT email, articles.name FROM users JOIN proposals ON users.user_id = proposals.user_id JOIN articles ON articles.article_id = proposals.article_id WHERE proposals.proposal_id = $proposal_id";
+    $email = $conn -> query($sql) -> fetch_assoc()["email"];
+    $articolo = $conn -> query($sql) -> fetch_assoc()["name"];
+    mail($email, "RIFIUTO DELLA SUA PROPOSATA", "La sua proposta per l'oggetto $articolo è stata rifiutata &#9747;");
+    */
+
     $sql = "UPDATE proposals
         SET status = -1
         WHERE proposal_id = $proposal_id";
