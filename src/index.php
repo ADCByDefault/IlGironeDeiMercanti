@@ -27,9 +27,8 @@ if (!isset($_SESSION["user_id"])) {
     <Header>
         <h1>Benvenuto nel Girone dei Mercanti </h1>
         <nav>
-            <p><a class="link" href="dashboard/dashboard.php">📌 dashboard</a></p>
-            <p><a class="link" href="comunications/comunication.php">✅ comunicazioni</a></p>
-            <p><a class="link" href="addArticle/addArticle.php">&#9741; aggiungi articolo</a></p>
+            <p><a class="link" href="dashboard/dashboard.php">📌 Dashboard</a></p>
+            <p><a class="link" href="addArticle/addArticle.php">&#9741; Aggiungi articolo</a></p>
             <select class="select input" name="type_id" id="typeSelect" value="0">
                 <option value="0">🌍 Tutto</option>
                 <?php
@@ -41,11 +40,11 @@ if (!isset($_SESSION["user_id"])) {
                 }
                 ?>
             </select>
-            <p><a class="link" href="authentication/logout.php">logout &#9758;</a></p>
+            <p><a class="link" href="authentication/logout.php">🏃🏿‍♀️Logout</a></p>
         </nav>
     </Header>
     <main>
-        <div class="error-container" id="errorContainer">Loading...</div>
+        <div class="error-container" id="errorContainer"><span class="loader"></span></div>
         <div class="articles-container" id="articlesContainer"></div>
     </main>
 </body>

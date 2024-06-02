@@ -12,6 +12,7 @@ function getArticle($conn, $article_id)
     while ($row = $res->fetch_assoc()) {
         $user_id = $row["user_id"];
         $type_id = $row["type_id"];
+        $data["user_id"] = $row["user_id"];
         $data["article_id"] = $row["article_id"];
         $data["name"] = $row["name"];
         $data["description"] = $row["description"];
@@ -94,4 +95,19 @@ function getProposalsWithUserIdAndArticleId($conn, $user_id, $article_id)
         ];
     }
     return $proposals;
+}
+
+function getArticlesByUserId($conn, $user_id)
+{
+    $sql = "SELECT * FROM articles
+            WHERE user_id = $user_id";
+    $res = $conn->query($sql);
+    if ($res->num_rows < 0) {
+        return [];
+    }
+    $data = [];
+    while ($row = $res->fetch_assoc()) {
+        $data[] = getArticle($conn, $row["article_id"]);
+    }
+    return $data;
 }

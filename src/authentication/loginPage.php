@@ -30,11 +30,13 @@ session_start();
         <form class="login-form" action="login.php" method="post" id="loginForm">
             <div>
                 <label class="label" for="username">Username</label>
-                <input class="input" type="text" name="username" id="username" placeholder="sonoMarioSturniolo" required />
+                <input class="input" type="text" name="username" id="username" placeholder="sonoMarioSturniolo"
+                    required />
             </div>
             <div>
                 <label class="label" for="password">Password</label>
-                <input class="input" type="password" name="password" id="password" placeholder="sonoMarioSturniolo" required />
+                <input class="input" type="password" name="password" id="password" placeholder="sonoMarioSturniolo"
+                    required />
             </div>
             <div>
                 <button class="btn">Accedi</button>
@@ -51,14 +53,14 @@ session_start();
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         event.submitter.disabled = true;
-        errorContainer.textContent = "Loading...";
+        errorContainer.innerHTML = "<span class='loader'></span>";
         const formData = new FormData(form);
         const response = await fetch("login.php", {
             method: "POST",
             body: formData,
         }).catch((error) => {
             console.error(error);
-            errorContainer.textContent = "Errore di connessione";
+            errorContainer.textContent = "Errore nella comunicazione col server";
             event.submitter.disabled = false;
             return;
         });
@@ -67,13 +69,12 @@ session_start();
         console.log(response);
         console.log(data);
 
-        errorContainer.textContent = data;
-        let message;
-        switch (data.status) {
+        let message = "Errore sconosciuto";
+        const status = data?.status ? data.status : "";
+        switch (status) {
             case "252":
                 message = "Hai fatto il login, verrai reindirizzato alla Home";
                 window.location.assign("../index.php");
-                errorContainer.textContent = message;
                 return;
                 break;
             case "453":
@@ -86,7 +87,7 @@ session_start();
                 message = "Campi vuoti";
                 break;
             default:
-                message = "Errore generico";
+                message = "Errore sconoisciuto";
         }
         console.log(message);
         errorContainer.textContent = message;

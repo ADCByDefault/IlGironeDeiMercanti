@@ -1,12 +1,56 @@
-const errorContainer = document.getElementById("errorContainer");
+const errorContainer = document.getElementById("informationContainer");
+const informationContainer = document.getElementById("informationContainer");
 const articles = document.getElementById("articles");
 const proposals = document.getElementById("proposals");
+const modificaImg = document.getElementById("modificaImg");
+const modificaInput = document.getElementById("modificaInput");
 let cont = 1;
+let articlesLoaded = false;
+let proposalsLoaded = false;
 window.addEventListener("load", (event) => {
-    getArticles();
-    getProposals();
-    errorContainer.textContent = "";
+    getArticles()
+        .then(() => {
+            articlesLoaded = true;
+            hideLoading();
+        })
+        .catch((error) => {
+            console.log(error);
+            informationContainer.classList.add("error");
+            informationContainer.innerHTML =
+                "Errore nel caricamento della pagina";
+            const p = document.createElement("p");
+            const link = document.createElement("a");
+            link.classList.add("link");
+            link.href = "../index.php";
+            link.textContent = "🏠 Torna alla home";
+            p.appendChild(link);
+            informationContainer.appendChild(p);
+        });
+    getProposals()
+        .then(() => {
+            proposalsLoaded = true;
+            hideLoading();
+        })
+        .catch((error) => {
+            console.log(error);
+            informationContainer.classList.add("error");
+            informationContainer.innerHTML =
+                "Errore nel caricamento della pagina";
+            const p = document.createElement("p");
+            const link = document.createElement("a");
+            link.classList.add("link");
+            link.href = "../index.php";
+            link.textContent = "🏠 Torna alla home";
+            p.appendChild(link);
+            informationContainer.appendChild(p);
+        });
 });
+
+function hideLoading() {
+    if (articlesLoaded && proposalsLoaded) {
+        errorContainer.innerHTML = "";
+    }
+}
 
 async function getArticles() {
     const response = await fetch("getDashboardArticles.php", {
@@ -111,8 +155,8 @@ async function getProposals() {
     if (data.data.length == 0) {
         const error = document.createElement("p");
         error.classList.add("error");
-        error.textContent = "Non hai effettuato proposta";
-        proposals.appendChild(error);
+        error.textContent = "Non hai effettuato proposte";
+        proposals.after(error);
         return;
     }
     data.data.forEach((proposal) => {
@@ -165,3 +209,52 @@ function createProposal(proposal) {
     // proposalElement.appendChild(link);
     return proposalElement;
 }
+
+async function modificaImmagine() {
+    const form = document.getElementById("articleForm");
+    const formData = new FormData(form);
+    const response = await fetch("modificaImmagine.php", {
+        method: "POST",
+        body: formData,
+    });
+
+    const data = await response.json();
+    console.log(data);
+    
+    let string = "Errore sconosciuto";
+    if (data.status == "251") {
+        string = "immagine cambiata";
+        window.location.reload();
+        return;
+    } else if ((data.status = "451")) {
+        string = "errore nell'inserimento dell'immagine";
+    } else if ((data.status = "452")) {
+        string = "estenzione non supportata";
+    }
+    console.log(error);
+    informationContainer.classList.add("error");
+    informationContainer.innerHTML = string;
+    const p = document.createElement("p");
+    const link = document.createElement("a");
+    link.classList.add("link");
+    link.href = "dashboard.php";
+    link.textContent = "🗘 Ricarica";
+    p.appendChild(link);
+    informationContainer.appendChild(p);
+}
+
+modificaInput.addEventListener("change", (e) => {
+    informationContainer.innerHTML = "<span class='loader'></span>";
+    modificaImmagine().catch((error) => {
+        console.log(error);
+        informationContainer.classList.add("error");
+        informationContainer.innerHTML = "Errore nel caricamento della pagina";
+        const p = document.createElement("p");
+        const link = document.createElement("a");
+        link.classList.add("link");
+        link.href = "dashboard.php";
+        link.textContent = "🗘 Ricarica";
+        p.appendChild(link);
+        informationContainer.appendChild(p);
+    });
+});

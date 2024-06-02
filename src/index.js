@@ -19,26 +19,34 @@ async function getAllArticles() {
     try {
         const response = await fetch(`getAllArticles.php?type_id=${type_id}`, {
             method: "GET",
+        }).catch((error)=>{
+            console.error(error);
+            errorContainer.textContent = "Errore nella comunicazione con il server";
+            return;
         });
         const data = await response.json();
         console.log(response);
         console.log(data);
-        if (data.status == "251") {
-            data.data.forEach((article) => {
-                const articleElement = createArticle(article);
-                articlesContainer.appendChild(articleElement);
-            });
-            errorContainer.textContent = "";
-            return;
+
+        const status = data?.status ? data.status : "";
+        switch (status) {
+            case "251":
+                    data.data.forEach((article) => {
+                    const articleElement = createArticle(article);
+                    articlesContainer.appendChild(articleElement);
+                });
+                errorContainer.textContent = "";
+                break;
+            case "551":
+                errorContainer.textContent = "Nessun Articolo Trovato";
+                break;
+            default:
+                errorContainer.textContent = "Errore sconosciuto";
+                break;
         }
-        if (data.status == "551") {
-            errorContainer.textContent = "Nessun Articolo Trovato";
-            return;
-        }
-        throw new Error("errore sconosciuto");
     } catch (error) {
         console.error(error);
-        errorContainer.textContent = "errore nel fetch o nella risposta";
+        errorContainer.textContent = "Errore nel fetch della risposta";
     }
 }
 

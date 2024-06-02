@@ -17,7 +17,9 @@ if (!isset($_SESSION["user_id"])) {
 
 <body>
     <div class="error-container" id="errorContainer"></div>
-    <div class="information-container" id="informationContainer">Loading...</div>
+    <div class="information-container" id="informationContainer">
+        <span class='loader'></span>
+    </div>
     <header>
         <p>
             <a class="link" href="../index.php" role="button">🏠 Home</a>
@@ -34,7 +36,7 @@ if (!isset($_SESSION["user_id"])) {
                 <p class="description" id="description">
                     descrizione dell'articolo
                 </p>
-                <p class="username" id="username">username</p>
+                <a class="username link" id="username">username</a>
                 <p class="created_at" id="created_at">14/07/1397</p>
             </div>
         </section>

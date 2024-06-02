@@ -149,8 +149,8 @@ label {
     padding: 1rem;
     padding-bottom: 1.2rem;
 }
-.article .name{
-    margin-top: .2rem;
+.article .name {
+    margin-top: 0.2rem;
 }
 .article .type {
     color: var(--text-color-gray);
@@ -160,14 +160,14 @@ label {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 .proposal {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1.5rem;
-    padding: 1.5rem;
+    padding: 1rem;
     background: var(--text-color-lighter);
     border: var(--btn-border-primary);
 }
@@ -176,6 +176,9 @@ label {
     font-weight: 700;
     display: flex;
     flex-direction: column;
+}
+.proposal-content p{
+    margin: 0;
 }
 .proposal {
     border: 2px solid var(--text-color);
@@ -285,4 +288,80 @@ label {
         linear-gradient(225deg, #444cf7 25%, transparent 25%) -10px 0/ 20px 20px,
         linear-gradient(315deg, #444cf755 25%, transparent 25%) 0px 0/ 20px 20px,
         linear-gradient(45deg, #444cf7 25%, #e5e5f7 25%) 0px 0/ 20px 20px;
+}
+
+.loader {
+    --color: #383434;
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin: 20px auto;
+    position: relative;
+    background: radial-gradient(
+            ellipse at center,
+            var(--color) 69%,
+            rgba(0, 0, 0, 0) 70%
+        ),
+        linear-gradient(
+            to right,
+            rgba(107, 107, 107, 0) 47%,
+            var(--color) 48%,
+            var(--color) 52%,
+            rgba(0, 0, 0, 0) 53%
+        );
+    background-size: 20px 20px, 20px auto;
+    background-repeat: repeat-x;
+    background-position: center bottom, center -5px;
+    box-sizing: border-box;
+}
+.loader::before,
+.loader::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    left: -20px;
+    top: 0;
+    width: 20px;
+    height: 60px;
+    background: radial-gradient(
+            ellipse at center,
+            var(--color) 69%,
+            rgba(0, 0, 0, 0) 70%
+        ),
+        linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0) 47%,
+            var(--color) 48%,
+            var(--color) 52%,
+            rgba(0, 0, 0, 0) 53%
+        );
+    background-size: 20px 20px, 20px auto;
+    background-repeat: no-repeat;
+    background-position: center bottom, center -5px;
+    transform: rotate(0deg);
+    transform-origin: 50% 0%;
+    animation: animPend .4s linear infinite alternate;
+}
+.loader::after {
+    animation: animPend2 .4s linear infinite alternate;
+    left: 100%;
+}
+
+@keyframes animPend {
+    0% {
+        transform: rotate(22deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes animPend2 {
+    0%,
+    55% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-22deg);
+    }
 }

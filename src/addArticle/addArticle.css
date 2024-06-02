@@ -1,3 +1,8 @@
+.message {
+    text-align: center;
+    color: var(--text-color-light);
+}
+
 .images-container {
     width: 100%;
     min-height: 20rem;

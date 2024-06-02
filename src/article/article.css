@@ -69,25 +69,6 @@ img {
     width: 100%;
 }
 
-.show-info {
-    animation: show-info 1s;
-}
-
-@keyframes show-info {
-    from {
-        position: initial;
-    }
-    1% {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-    to {
-        position: initial;
-    }
-}
 
 .make-proposal,
 .proposals-container {
@@ -109,8 +90,20 @@ img {
 }
 .slider {
     border-radius: var(--border-radius);
-    overflow: hidden;
     --slide-width: clamp(270px, calc(40px + 45vw), 800px);
     --slide-height: clamp(200px, auto, 600px);
     aspect-ratio: 16/9;
+}
+
+.error{
+    background-color: var(--text-color-light);
+}
+
+p.error{
+    color: var(--text-color-light);
+    background-color: initial;
+}
+
+.error p{
+    text-align: center;
 }

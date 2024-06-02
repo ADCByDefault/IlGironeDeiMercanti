@@ -6,8 +6,10 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 $user_id = $_SESSION["user_id"];
-$sql = "SELECT username FROM users WHERE user_id = $user_id";
+$sql = "SELECT username, image_url FROM users JOIN images on users.image_id = images.image_id WHERE user_id = '$user_id'";
+
 $username = $conn->query($sql)->fetch_assoc()["username"];
+$image_url = $conn->query($sql)->fetch_assoc()["image_url"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +25,9 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
 </head>
 
 <body>
+    <div class="information-container" id="informationContainer">
+        <span class='loader'></span>
+    </div>
     <header>
         <h1>
             Il Girone Dei Mercanti
@@ -31,7 +36,6 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
         if (isset($_SESSION["error"])) {
             echo "<p>" . $_SESSION["error"] . "</p>";
         }
-        echo "<h2 class=\"text-center\">" . " Benvenuto " . $username . "</h2>";
         ?>
         <nav>
             <p>
@@ -40,7 +44,16 @@ $username = $conn->query($sql)->fetch_assoc()["username"];
         </nav>
     </header>
     <main>
-        <div id="errorContainer" class="error-container">Loading...</div>
+        <div class="img-container">
+            <?php
+            echo "<div><img src = '../../$image_url' alt='profilo' class='profile-img'>
+                <form action='makeArticle.php' method='post' id='articleForm' enctype='multipart/form-data'>
+                    <label class='label' for='modificaInput' id='modificaImg'>📸 Modifica Immagine</label>
+                    <input class='input' type='file' name='img' id='modificaInput' style = 'display: none'>
+                </form></div>";
+            echo "<h2>Benvenuto " . $username . "</h2>";
+            ?>
+        </div>
         <div class="container">
             <h2>i tuoi articoli sul mercato</h2>
             <section id="articles" class="articles-container"></section>

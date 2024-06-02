@@ -8,7 +8,7 @@
     <style>
         @font-face {
             font-family: "Fortnite";
-            src: url("http://localhost:8080/IlGironeDeiMercanti/src/error/Fortnite.otf");
+            src: url("http://192.168.1.66:8080/IlGironeDeiMercanti/src/error/fortnite.otf");
         }
 
         * {

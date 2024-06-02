@@ -29,10 +29,11 @@ if (!isset($_SESSION["user_id"])) {
         <p class="error-container" id="errorContainer"></p>
         <p class="information-container" id="informationContainer"></p>
         <section class="addArticle" id="addArticle">
+            <p class="message">Files sopra 2MB e file non supportati verrano ignorati</p>
             <form action="makeArticle.php" method="post" id="articleForm" enctype="multipart/form-data">
                 <div>
                     <label class="label" for="img">📸 Immagine</label>
-                    <input class="input" type="file" name="img" id="img">
+                    <input class="input" type="file" name="img[]" id="img" multiple accept=".jpg, .jpeg, .png, .webp">
                     <!-- <p>Estensioni Consentite -> .jpg .jpeg .png .gif .webp</p> -->
                 </div>
                 <div>
@@ -41,7 +42,8 @@ if (!isset($_SESSION["user_id"])) {
                 </div>
                 <div>
                     <label class="label" for="price">Breve Descrizione</label>
-                    <input class="input" type="text" name="descrizione" placeholder="Preziosa pietra trovata lungo il Mugnone">
+                    <input class="input" type="text" name="descrizione"
+                        placeholder="Preziosa pietra trovata lungo il Mugnone">
                 </div>
                 <div>
                     <label for="type">Tipologia</label>

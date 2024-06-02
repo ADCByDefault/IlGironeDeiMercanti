@@ -14,14 +14,24 @@ window.addEventListener("load", () => {
     const article_id = new URLSearchParams(window.location.search).get(
         "article_id"
     );
-    setPage(article_id);
+    setPage(article_id).catch((error) => {
+        console.log(error);
+        informationContainer.classList.add("error");
+        informationContainer.innerHTML = "Errore nel caricamento della pagina";
+        const p = document.createElement("p");
+        const link = document.createElement("a");
+        link.classList.add("link");
+        link.href = "../index.php";
+        link.textContent = "🏠 Torna alla home";
+        p.appendChild(link);
+        informationContainer.appendChild(p);
+    });
 });
 
 async function setPage(article_id) {
     const res = await getArticle(article_id);
     if (res.status == 451) {
-        errorContainer.textContent = "errore generico";
-        return;
+       throw new Error("Articolo non trovato");
     }
     const article = res.data;
     setArticle(article);
@@ -37,12 +47,13 @@ async function setPage(article_id) {
             form.remove();
         });
     }
-    const prop = Array.from(document.querySelectorAll(".declined form, .accepted from"));
+    const prop = Array.from(
+        document.querySelectorAll(".declined form, .accepted from")
+    );
     prop.forEach((p) => {
         p.remove();
     });
     informationContainer.textContent = "";
-    console.log(article);
 }
 
 async function getArticle(article_id) {
@@ -55,6 +66,7 @@ async function getArticle(article_id) {
 async function setArticle(article) {
     articleNameContainer.textContent = article.name;
     articleUsernameContainer.textContent = article.username;
+    articleUsernameContainer.href = `../user/user.php?user_id=${article.user_id}`;
     articleDescriptionContainer.textContent = article.description;
     articleCreatedAtContainer.textContent = article.created_at;
     setImages(article.images);
@@ -78,7 +90,7 @@ function setImages(images) {
 function setProposals(proposals) {
     if (!proposals || proposals.length == 0) {
         const p = document.createElement("p");
-        p.textContent = "non ci sono proposte";
+        p.innerHTML = "Non ci sono proposte";
         proposalsContainer.appendChild(p);
         return;
     }
@@ -147,11 +159,11 @@ function makeAcceptOrDeclineForms(proposal_id, action, status) {
 function addListenerToForm(form, action) {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        informationContainer.textContent = "Loading...";
+        informationContainer.innerHTML = "<span class='loader'></span>";
         while (proposalsContainer.firstChild) {
             proposalsContainer.removeChild(proposalsContainer.firstChild);
         }
-        proposalsContainer.textContent = "loading...";
+        proposalsContainer.textContent = "<span class='loader'></span>";
         const buttons = Array.from(document.querySelectorAll("button"));
         buttons.forEach((button) => {
             button.disabled = true;
@@ -171,7 +183,7 @@ makeProposal.addEventListener("submit", async (e) => {
     e.preventDefault();
     e.submitter.disabled = true;
     errorContainer.textContent = "";
-    informationContainer.textContent = "Loading...";
+    informationContainer.innerHTML = "<span class='loader'></span>";
     const form = document.getElementById("proposalForm");
     const formData = new FormData(form);
     const response = await fetch("makeProposal.php", {

@@ -39,6 +39,11 @@ if($result -> num_rows > 0){
             WHERE proposal_id = $proposal_id";
     $response = $conn->query($sql);
 
+    $sql = "SELECT email, articles.name FROM users JOIN proposals ON users.user_id = proposals.user_id JOIN articles ON articles.article_id = proposals.article_id WHERE articles.article_id = $article_id AND status = 1";
+    $email = $conn -> query($sql) -> fetch_assoc()["email"];
+    $articolo = $conn -> query($sql) -> fetch_assoc()["name"];
+    mail($email, "APPROVATA LA SUA PROPOSATA", "la sua proposta per l'oggetto $articolo è stata accettata", 'From: ndreu1@altervista.org\n');
+
     $res = new Response(251);
     echo $res->json();
 }
