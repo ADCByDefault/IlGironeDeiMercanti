@@ -2,7 +2,7 @@
 include_once "authentication/connessione.php";
 include_once "class/Response.php";
 if (!isset($_SESSION["user_id"])) {
-    $_SESSION["error"] = "devi fare il login";
+    $_SESSION["error"] = "Devi fare il login";
     header("Location: authentication/loginPage.php");
     exit();
 }

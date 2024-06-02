@@ -30,18 +30,18 @@ session_start();
         <form class="login-form" action="login.php" method="post" id="loginForm">
             <div>
                 <label class="label" for="username">Username</label>
-                <input class="input" type="text" name="username" id="username" placeholder="username" required />
+                <input class="input" type="text" name="username" id="username" placeholder="sonoMarioSturniolo" required />
             </div>
             <div>
                 <label class="label" for="password">Password</label>
-                <input class="input" type="password" name="password" id="password" placeholder="password" required />
+                <input class="input" type="password" name="password" id="password" placeholder="sonoMarioSturniolo" required />
             </div>
             <div>
-                <button class="btn">Invia</button>
+                <button class="btn">Accedi</button>
             </div>
         </form>
         <div>
-            <a href="signupPage.php" class="link">Registrati &rarr;</a>
+            <a href="signupPage.php" class="link">Pagina Signup &rarr;</a>
         </div>
     </main>
 </body>
@@ -56,26 +56,41 @@ session_start();
         const response = await fetch("login.php", {
             method: "POST",
             body: formData,
+        }).catch((error) => {
+            console.error(error);
+            errorContainer.textContent = "Errore di connessione";
+            event.submitter.disabled = false;
+            return;
         });
+
         const data = await response.json();
         console.log(response);
         console.log(data);
 
-
         errorContainer.textContent = data;
         let message;
-        if (data.status == "252") {
-            message = "Hai fatto il login, verrai reindirizzato alla tua pagina di profilo fra poco";
-            window.location.assign("../index.php");
-        } else if (data.status == "453") {
-            message = "password sbagliata";
-        } else if (data.status == "451") {
-            message = "username o email sbagliati";
-        } else {
-            message = "errore generico";
+        switch (data.status) {
+            case "252":
+                message = "Hai fatto il login, verrai reindirizzato alla Home";
+                window.location.assign("../index.php");
+                errorContainer.textContent = message;
+                return;
+                break;
+            case "453":
+                message = "Password sbagliata";
+                break;
+            case "451":
+                message = "Username o Email sbagliati";
+                break;
+            case "450":
+                message = "Campi vuoti";
+                break;
+            default:
+                message = "Errore generico";
         }
         console.log(message);
         errorContainer.textContent = message;
+        event.submitter.disabled = false;
     });
 </script>
 

@@ -1,2 +1,2 @@
 <?php
-header("Location: src/index.php");
+header("Location: src/authentication/loginPage.php");

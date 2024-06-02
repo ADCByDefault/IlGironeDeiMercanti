@@ -26,8 +26,7 @@
             </div>
             <div>
                 <label for="username">username</label>
-                <input class="input" type="text" name="username" id="username" placeholder="sonoMarioSturniolo"
-                    required />
+                <input class="input" type="text" name="username" id="username" placeholder="sonoMarioSturniolo" required />
             </div>
             <div>
                 <label for="email">email</label>
@@ -35,13 +34,11 @@
             </div>
             <div>
                 <label for="password">password</label>
-                <input class="input" type="password" name="password" id="password" placeholder="sonoMarioSturniolo"
-                    required />
+                <input class="input" type="password" name="password" id="password" placeholder="sonoMarioSturniolo" required />
             </div>
             <div>
                 <label for="conferma">conferma password</label>
-                <input class="input" type="password" name="conferma" id="conferma" placeholder="sonoMarioSturniolo"
-                    required />
+                <input class="input" type="password" name="conferma" id="conferma" placeholder="sonoMarioSturniolo" required />
             </div>
             <button class="btn">Invio</button>
         </form>
@@ -78,11 +75,11 @@
             message = "email o username già in uso";
         } else if (data.status == "452") {
             message = "le due password non corrispondono";
-        }
-        else {
+        } else {
             message = "errore sconosciuto";
         }
         errorContainer.textContent = message;
+        event.submitter.disabled = false;
     });
 </script>
 

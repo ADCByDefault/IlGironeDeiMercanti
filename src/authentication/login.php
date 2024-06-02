@@ -4,6 +4,13 @@ include 'connessione.php';
 include_once '../class/Response.php';
 
 $username = $_POST["username"];
+$password = $_POST["password"];
+
+if ($username == "" || $password == "") {
+    $res = new Response("450"); //campi vuoti
+    echo $res->json();
+    exit();
+}
 $password = hash('sha256', $_POST["password"]);
 
 $sql = "SELECT user_id, password from users where username = '{$username}' or email = '{$username}'";
@@ -23,4 +30,3 @@ if ($result->num_rows > 0) {
 }
 
 echo $res->json();
-//header("location: ../profile.php");
