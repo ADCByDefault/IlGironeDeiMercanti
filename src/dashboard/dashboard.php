@@ -6,10 +6,12 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 $user_id = $_SESSION["user_id"];
-$sql = "SELECT username, image_url FROM users JOIN images on users.image_id = images.image_id WHERE user_id = '$user_id'";
+$sql = "SELECT username, image_url, email FROM users JOIN images on users.image_id = images.image_id WHERE user_id = '$user_id'";
 
 $username = $conn->query($sql)->fetch_assoc()["username"];
 $image_url = $conn->query($sql)->fetch_assoc()["image_url"];
+$email = $conn->query($sql)->fetch_assoc()["email"];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +53,8 @@ $image_url = $conn->query($sql)->fetch_assoc()["image_url"];
                     <label class='label' for='modificaInput' id='modificaImg'>📸 Modifica Immagine</label>
                     <input class='input' type='file' name='img' id='modificaInput' style = 'display: none'>
                 </form></div>";
-            echo "<h2>Benvenuto " . $username . "</h2>";
+            //echo "<h2>Benvenuto " . $username . "</h2>";
+            echo "<a class='link' href = 'https://mail.google.com' ></a>$email"
             ?>
         </div>
         <div class="container">

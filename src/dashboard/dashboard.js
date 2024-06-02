@@ -218,9 +218,9 @@ async function modificaImmagine() {
         body: formData,
     });
 
-    const data = await response.json();
+    const data = await response.text();
     console.log(data);
-    
+    return;
     let string = "Errore sconosciuto";
     if (data.status == "251") {
         string = "immagine cambiata";
