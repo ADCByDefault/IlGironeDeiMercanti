@@ -49,16 +49,17 @@ function getArticleWithProposals($conn, $article_id)
     $proposals = [];
     $sql = "SELECT * FROM proposals
             JOIN users ON proposals.user_id = users.user_id
-            WHERE article_id = $article_id 
-            ORDER BY DESC proposal.status ";
+            WHERE article_id = $article_id";
     $res = $conn->query($sql);
-    while ($row = $res->fetch_assoc()) {
+    echo $res->num_rows;
+    $proposals = [];
+      while ($row = $res->fetch_assoc()) {
         $proposals[] = [
-            "username" => $row["username"],
-            "proposal_id" => $row["proposal_id"],
-            "price" => $row["price"],
-            "created_at" => $row["created_at"],
-            "status" => $row["status"]
+          "username" => $row["username"],
+          "proposal_id" => $row["proposal_id"],
+          "price" => $row["price"],
+          "created_at" => $row["created_at"],
+          "status" => $row["status"]
         ];
     }
     $data["proposals"] = $proposals;
@@ -82,7 +83,7 @@ function getProposalsWithUserIdAndArticleId($conn, $user_id, $article_id)
             JOIN users ON proposals.user_id = users.user_id
             WHERE article_id = $article_id";
     $res = $conn->query($sql);
-    if ($res->num_rows < 0) {
+    if ($res->num_rows <= 0) {
         return [];
     }
     $proposals = [];

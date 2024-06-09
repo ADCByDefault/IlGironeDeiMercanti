@@ -9,8 +9,6 @@ if (!isset($_SESSION["user_id"]) || !isset($_POST["article_id"])) {
     die();
 }
 
-
-
 $user_id = $_SESSION["user_id"];
 
 if (!isset($_POST["article_id"])) {
@@ -33,9 +31,15 @@ $price = mysqli_real_escape_string($conn, $price);
 $sql = "SELECT proposal_id FROM proposals WHERE article_id = $article_id && user_id = $user_id";
 $result = $conn -> query($sql);
 
-
 if($result -> num_rows > 0){
     $proposal_id = $result->fetch_assoc()["proposal_id"];
+    $sql = "SELECT status FROM proposals WHERE proposal_id = $proposal_id";
+    $status = $conn->query($sql)->fetch_assoc()["status"];
+    if($status != 0){
+    	$res = new Response(453);
+    	echo $res->json();
+        die();
+    }
     $sql = "UPDATE proposals
         SET price = $price
         WHERE proposal_id = '$proposal_id'";

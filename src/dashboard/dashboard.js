@@ -162,6 +162,8 @@ async function getProposals() {
     data.data.forEach((proposal) => {
         const proposalElement = createProposal(proposal);
         proposals.appendChild(proposalElement);
+        console.log(proposals);
+        console.log(proposalElement)
     });
 }
 
@@ -218,9 +220,8 @@ async function modificaImmagine() {
         body: formData,
     });
 
-    const data = await response.text();
+    const data = await response.json();
     console.log(data);
-    return;
     let string = "Errore sconosciuto";
     if (data.status == "251") {
         string = "immagine cambiata";
@@ -229,6 +230,12 @@ async function modificaImmagine() {
     } else if ((data.status = "451")) {
         string = "errore nell'inserimento dell'immagine";
     } else if ((data.status = "452")) {
+        string = "Estenzione non supportata";
+    }
+    else if ((data.status = "453")) {
+        string = "Impossibile caricare l'immagine";
+    }
+    else if ((data.status = "453")) {
         string = "estenzione non supportata";
     }
     console.log(error);

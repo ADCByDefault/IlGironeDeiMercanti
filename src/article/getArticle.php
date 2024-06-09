@@ -29,14 +29,15 @@ $sql = "SELECT article_id FROM articles
             WHERE article_id = $article_id";
 $res = $conn->query($sql);
 if ($res->num_rows <= 0) {
-    Response::send(452); // article not found
+    Response::send(451); // article not found
     exit();
 }
 
 $data = null;
 try {
     $article_user_id = getArticleUserId($conn, $article_id);
-    if ($article_user_id == $request_user_id) {
+    //if (intval($article_user_id) == intval($request_user_id)) {
+    if(false){
         $data = getArticleWithProposals($conn, $article_id);
     } else {
         $data = getArticle($conn, $article_id);

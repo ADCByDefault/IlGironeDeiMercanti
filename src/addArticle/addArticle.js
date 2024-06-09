@@ -33,6 +33,8 @@ addArticle.addEventListener("submit", async (e) => {
         } else if (json.status == 453) {
             errorContainer.innerHTML =
                 "L'estenzione del file non e' supportata";
+        }else if (json.status == 553) {
+            errorContainer.innerHTML = "Errore Interno al server";
         }
     } catch (e) {
         errorContainer.innerHTML = "";

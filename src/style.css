@@ -223,6 +223,7 @@ label {
 
 .slider-wrapper {
     position: relative;
+    padding: 5px;
 }
 
 .slider {
@@ -230,6 +231,7 @@ label {
     --slide-height: clamp(240px, 75vh, 600px);
 
     display: grid;
+    gap: 5px;
     grid-auto-flow: column;
     scroll-snap-type: x mandatory;
     max-width: var(--slide-width);
@@ -247,11 +249,12 @@ label {
 
 .slide {
     scroll-snap-align: start;
-    width: var(--slide-width);
+    width: calc(var(--slide-width) - 10px);
     height: var(--slide-height);
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    border-radius: var(--border-radius);
 }
 
 .dots {

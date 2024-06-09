@@ -53,12 +53,10 @@ if (isset($_FILES["img"])) {
     
     
     $sql = "INSERT INTO images(image_url) VALUE ('upload/users/$user_id.$imageFileType')";
-    echo $sql;
     $conn->query($sql);
     $image_id = $conn->insert_id;
 
     $sql = "UPDATE users SET image_id = $image_id WHERE user_id = $user_id";
-    echo $sql;
     $conn->query($sql);
 
     $res = new Response("251");

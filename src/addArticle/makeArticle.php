@@ -38,15 +38,19 @@ $result = $conn->query($sql);
 if ($result->num_rows <= 0 || $name == "" || $description == "") {
     $res = new Response("451");
     echo $res->json();
-    return;
+    die();
 }
 $sql = "INSERT INTO articles (user_id, type_id, name, description) VALUE ($user_id, $type_id, '$name', '$description')";
 $conn->query($sql);
+if($conn->affected_rows <= 0){
+    $res = new Response(553);
+    echo $res->json();
+    die();
+}
 $article_id = $conn->insert_id;
 
 // $temp = $_FILES["img"]["tmp_name"];
 // $imageFileType = strtolower(pathinfo($img, PATHINFO_EXTENSION));
-
 // if (!move_uploaded_file($temp, "../../upload/$article_id.$imageFileType")) {
 //     $res = new Response("452");
 //     echo $res->json();
@@ -74,7 +78,7 @@ foreach ($_FILES['img']['tmp_name'] as $key => $value) {
     $file_size = $_FILES['img']['size'][$key];
     $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
     //remove not supported characters from file name
-    $characters = array(" ", "(", ")", "[", "]", "{", "}", ",", ".", ":", ";", "!", "?", "/", "\\", "|", "<", ">", "*", "&", "^", "%", "$", "#", "@", "€", "£", "§", "°", "ç", "à", "è", "é", "ì", "ò", "ù", "€", "£", "§", "°", "ç", "à", "è", "é", "ì", "ò", "ù");
+    $characters = array(" ", "(", ")", "[", "]", "{", "}", ",", ":", ";", "!", "?", "/", "\\", "|", "<", ">", "*", "&", "^", "%", "$", "#", "@", "€", "£", "§", "°", "ç", "à", "è", "é", "ì", "ò", "ù", "€", "£", "§", "°", "ç", "à", "è", "é", "ì", "ò", "ù");
     $file_name = str_replace($characters, "_", $file_name);
     if (!is_dir("../../" . $upload_dir . $article_id)) {
         mkdir("../../".$upload_dir . $article_id);

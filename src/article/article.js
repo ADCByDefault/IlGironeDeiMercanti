@@ -30,8 +30,17 @@ window.addEventListener("load", () => {
 
 async function setPage(article_id) {
     const res = await getArticle(article_id);
-    if (res.status == 451) {
-       throw new Error("Articolo non trovato");
+    if (res.status == 451 || res.status == 452) {
+       informationContainer.classList.add("error");
+        informationContainer.innerHTML = "Articolo non trovato";
+        const p = document.createElement("p");
+        const link = document.createElement("a");
+        link.classList.add("link");
+        link.href = "../index.php";
+        link.textContent = "🏠 Torna alla home";
+        p.appendChild(link);
+        informationContainer.appendChild(p);
+        return;
     }
     const article = res.data;
     setArticle(article);
@@ -59,7 +68,7 @@ async function setPage(article_id) {
 async function getArticle(article_id) {
     const response = await fetch(`getArticle.php?article_id=${article_id}`);
     const article = await response.json();
-    console.log(article.data);
+    console.log(article);
     return article;
 }
 
@@ -199,11 +208,14 @@ makeProposal.addEventListener("submit", async (e) => {
     } else if (json.status == 252) {
         informationContainer.textContent = "proposta aggiornata con successo";
     } else if (json.status == 451) {
-        errorContainer.textContent = "non è stato inserito un prezzo";
+        informationContainer.textContent = "non è stato inserito un prezzo";
+        informationContainer.classList.add("error");
     } else if (json.status == 452) {
-        errorContainer.textContent = "non è stata scelta nessuna proposta";
-    } else if (json.status == 454) {
-        errorContainer.textContent = "una proposta è già stata accettata";
+        informationContainer.textContent = "non è stata scelta nessuna proposta";
+        informationContainer.classList.add("error");
+    } else if (json.status == 453){
+    	informationContainer.textContent = "una proposta è già stata accettata";
+        informationContainer.classList.add("error");
     }
     await sleep(3000);
     window.location.reload();

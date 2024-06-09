@@ -43,7 +43,7 @@ nav p {
 .articles-container:empty {
     display: none;
 }
-.proposals-container {
+.proposals-container:empty {
     display: none;
 }
 

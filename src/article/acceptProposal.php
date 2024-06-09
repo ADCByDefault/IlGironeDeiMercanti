@@ -19,7 +19,7 @@ $sql = "SELECT article_id FROM proposals WHERE proposal_id = $proposal_id";
 $result = $conn->query($sql);
 $article_id = $result->fetch_assoc()["article_id"];
 
-/*
+// invio mail di rifiuto ai altri utenti
 $article_id = mysqli_real_escape_string($conn, $article_id);
 $sql = "SELECT email, articles.name FROM proposals 
         join users on users.user_id = proposals.user_id
@@ -29,34 +29,32 @@ $result = $conn -> query($sql);
 while($row = $result -> fetch_assoc()){
     $email = $row["email"];
     $articolo = $row["name"];
-    mail($email, "RIFIUTO DELLA SUA PROPOSATA", "La sua proposta per l'oggetto $articolo è stata rifiutata &#9747;");
+    mail($email, "RIFIUTO DELLA SUA PROPOSATA", "<h1 style='color:'crimson'; text-align:center;'>La sua proposta per l'oggetto $articolo è stata rifiutata &#9747;</h1>");
 }
-*/
 
+$sql = "SELECT article_id FROM proposals WHERE proposal_id = $proposal_id";
 $result = $conn -> query($sql);
-if($result -> num_rows > 0){
+if($result -> num_rows <= 0){
     $res = new Response(454);
     echo $res->json();
 }else{
-
     $article_id = mysqli_real_escape_string($conn, $article_id);
     $sql = "UPDATE proposals
             SET status = -1
             WHERE article_id = $article_id";
     $response = $conn->query($sql);
-
     $proposal_id = mysqli_real_escape_string($conn, $proposal_id);
     $sql = "UPDATE proposals
             SET status = 1
             WHERE proposal_id = $proposal_id";
     $response = $conn->query($sql);
 
-    /*
+    //invio mail accettazione
     $sql = "SELECT email, articles.name FROM users JOIN proposals ON users.user_id = proposals.user_id JOIN articles ON articles.article_id = proposals.article_id WHERE articles.article_id = $article_id AND status = 1";
     $email = $conn -> query($sql) -> fetch_assoc()["email"];
     $articolo = $conn -> query($sql) -> fetch_assoc()["name"];
-    mail($email, "APPROVATA LA SUA PROPOSATA", "La sua proposta per l'oggetto $articolo è stata accettata &#9745;", 'From: ndreu1@altervista.org\n');
-    */
+    mail($email, "APPROVATA LA SUA PROPOSATA", "<h1 style='color:'lime'; text-align:center;'>La sua proposta per l'oggetto $articolo è stata accettata &#9745;</h1>", 'From: ndreu1@altervista.org\n');
+    
 
     $res = new Response(251);
     echo $res->json();
